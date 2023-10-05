@@ -37,7 +37,7 @@ export default function Navigation() {
 							path === link.path
 								? "mx-0 my-0 px-4 py-2 text-neutral-950 bg-blue"
 								: "mx-2 hover:mx-0 my-1 hover:my-0 px-2 hover:px-4 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
-						} duration-200 ease-out`}
+						} active:scale-[97%] duration-200 ease-out`}
 					>
 						<i className={link.icon} />
 						<span className={path === link.path ? "font-medium" : ""}>{link.name}</span>
@@ -59,7 +59,11 @@ export default function Navigation() {
 			<div className="text-xs">
 				[
 				<Link
-					href={path === "/" ? "https://github.com/pprmint/tools.ppr.one" : `https://github.com/pprmint/tools.ppr.one/tree/main/app${path}`}
+					href={
+						Links.some((link) => path === link.path) && path != "/"
+							? `https://github.com/pprmint/tools.ppr.one/tree/main/app${path}`
+							: "https://github.com/pprmint/tools.ppr.one"
+					}
 					target="_blank"
 					rel="noopener noreferrer"
 					className="group hover:text-neutral-50 duration-200"

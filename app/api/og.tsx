@@ -8,7 +8,7 @@ export async function GET(title: string, description: string) {
 			<div
 				style={{
 					fontSize: 128,
-					background: "white",
+					background: "#111111",
 					width: "100%",
 					height: "100%",
 					display: "flex",
@@ -22,8 +22,8 @@ export async function GET(title: string, description: string) {
 			</div>
 		),
 		{
-			width: 1200,
-			height: 600,
+			width: 1600,
+			height: 836,
 		}
 	);
 }
