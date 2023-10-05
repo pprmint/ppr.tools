@@ -33,11 +33,11 @@ export default function Navigation() {
 					<Link
 						key={link.path}
 						href={link.path}
-						className={`group flex gap-3 py-2 px-4 rounded-full ${
+						className={`group flex gap-3 rounded-full ${
 							path === link.path
-								? "text-neutral-950 bg-blue"
-								: "hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
-						} duration-100`}
+								? "mx-0 my-0 px-4 py-2 text-neutral-950 bg-blue"
+								: "mx-2 hover:mx-0 my-1 hover:my-0 px-2 hover:px-4 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
+						} duration-200 ease-out`}
 					>
 						<i className={link.icon} />
 						<span className={path === link.path ? "font-medium" : ""}>{link.name}</span>
