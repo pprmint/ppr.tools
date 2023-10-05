@@ -45,8 +45,29 @@ export default function Navigation() {
 				))}
 			</div>
 			<p>
-				Made by <Link href="https://pprmint.art" target="_blank">pprmint.</Link>
+				Made by{" "}
+				<Link
+					href="https://pprmint.art"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="group hover:text-neutral-50 duration-200"
+				>
+					pprmint<span className="group-hover:text-[#0c6] duration-200">.</span>
+					<span className="opacity-0 group-hover:opacity-100 duration-200">art</span>
+				</Link>
 			</p>
+			<div className="text-xs">
+				[
+				<Link
+					href={path === "/" ? "https://github.com/pprmint/tools.ppr.one" : `https://github.com/pprmint/tools.ppr.one/tree/main/app${path}`}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="group hover:text-neutral-50 duration-200"
+				>
+					source
+				</Link>
+				]
+			</div>
 		</nav>
 	);
 }

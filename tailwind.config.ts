@@ -63,6 +63,21 @@ const config: Config = {
 					"Consolas",
 				],
 			},
+			keyframes: {
+				pageIn: {
+					from: {
+						opacity: "0%",
+						transform: "translateY(50px)",
+					},
+					to: {
+						opacity: "100%",
+						transform: "translateY(0px)",
+					},
+				},
+			},
+            animation: {
+                "page-in": "pageIn .5s cubic-bezier(0.16, 1, 0.3, 1)"
+            }
 		},
 	},
 	plugins: [],
