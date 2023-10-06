@@ -4,8 +4,8 @@ import * as Slider from "@radix-ui/react-slider";
 import Button from "components/Button";
 
 export default function Component() {
-	const [sourceColor, setSourceColor] = useState("eee");
-	const [targetColor, setTargetColor] = useState("666"); // cry about it
+	const [sourceColor, setSourceColor] = useState("123456");
+	const [targetColor, setTargetColor] = useState("ABCDEF"); // cry about it
 
 	const [brightness, setBrightness] = useState([100]);
 	const [contrast, setContrast] = useState([100]);
@@ -14,9 +14,18 @@ export default function Component() {
 	const [saturate, setSaturate] = useState([100]);
 	const [sepia, setSepia] = useState([0]);
 
-	const [focus, setFocus] = useState("");
+	const allFilters = [
+		brightness[0] !== 100 ? `brightness(${brightness[0]}%)` : "",
+		contrast[0] !== 100 ? `contrast(${contrast[0]}%)` : "",
+		hueRotate[0] !== 0 ? `hue-rotate(${hueRotate[0]}deg)` : "",
+		invert[0] !== 0 ? `invert(${invert[0]}%)` : "",
+		saturate[0] !== 100 ? `saturate(${saturate[0]}%)` : "",
+		sepia[0] !== 0 ? `sepia(${sepia[0]}%)` : "",
+	]
+		.filter((filter) => filter !== "")
+		.join(" ");
 
-	const allFilters = `brightness(${brightness}%) contrast(${contrast}%) hue-rotate(${hueRotate}deg) invert(${invert}%) saturate(${saturate}%) sepia(${sepia}%)`;
+	const filters = allFilters.length > 0 ? allFilters : "none";
 
 	return (
 		<div className="grid grid-cols-2 gap-6">
@@ -24,7 +33,7 @@ export default function Component() {
 				<label htmlFor="source" className="text-xs">
 					Source color
 				</label>
-				<div className="flex items-center text-neutral-50 font-display text-2xl md:text-3xl lg:text-6xl">
+				<div className="flex items-center text-neutral-50 font-display text-2xl md:text-3xl lg:text-4xl xl:text-6xl">
 					#
 					<input
 						type="text"
@@ -43,7 +52,7 @@ export default function Component() {
 				<label htmlFor="target" className="text-xs">
 					Target color
 				</label>
-				<div className="flex items-center text-neutral-50 font-display text-2xl md:text-3xl lg:text-6xl">
+				<div className="flex items-center text-neutral-50 font-display text-2xl md:text-3xl lg:text-4xl xl:text-6xl">
 					#
 					<input
 						type="text"
@@ -70,59 +79,23 @@ export default function Component() {
 			</div>
 			<div className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3">
 				<p className="flex-grow">
-					filter:{" "}
-					<span
-						className={`${
-							focus === "brightness" || focus === "" ? "text-neutral-50" : "text-neutral"
-						} duration-100`}
-					>
-						brightness({brightness}%)
-					</span>{" "}
-					<span
-						className={`${
-							focus === "contrast" || focus === "" ? "text-neutral-50" : "text-neutral"
-						} duration-100`}
-					>
-						contrast({contrast}%)
-					</span>{" "}
-					<span
-						className={`${
-							focus === "hueRotate" || focus === "" ? "text-neutral-50" : "text-neutral"
-						} duration-100`}
-					>
-						hue-rotate({hueRotate}deg)
-					</span>{" "}
-					<span
-						className={`${
-							focus === "invert" || focus === "" ? "text-neutral-50" : "text-neutral"
-						} duration-100`}
-					>
-						invert({invert}%)
-					</span>{" "}
-					<span
-						className={`${
-							focus === "saturate" || focus === "" ? "text-neutral-50" : "text-neutral"
-						} duration-100`}
-					>
-						saturate({saturate}%)
-					</span>{" "}
-					<span
-						className={`${
-							focus === "sepia" || focus === "" ? "text-neutral-50" : "text-neutral"
-						} duration-100`}
-					>
-						sepia({sepia}%)
-					</span>;
+					filter: <span className="text-neutral-50">{filters}</span>;
 				</p>
 				<i
 					className="ri-clipboard-line cursor-pointer hover:text-neutral-50 duration-100"
-					onClick={() => navigator.clipboard.writeText(`filter: ${allFilters};`)}
+					onClick={() => navigator.clipboard.writeText(`filter: ${filters};`)}
 				/>
 			</div>
 			<div className="flex flex-col col-span-2 lg:col-span-1">
-				<label htmlFor="brightness" className="text-xs">
-					Brightness
-				</label>
+				<div className="flex justify-between text-xs">
+					<label htmlFor="brightness">Brightness</label>
+					{brightness[0] !== 100 && (
+						<i
+							onClick={() => setBrightness([100])}
+							className="ri-loop-left-line hover:text-neutral-50 hover:-rotate-180 cursor-pointer duration-300 ease-in-out"
+						/>
+					)}
+				</div>
 				<Slider.Root
 					name="brightness"
 					className="group relative flex items-center select-none touch-none w-full h-5 cursor-pointer"
@@ -131,8 +104,6 @@ export default function Component() {
 					defaultValue={brightness}
 					max={500}
 					step={1}
-					onMouseEnter={() => setFocus("brightness")}
-					onMouseLeave={() => setFocus("")}
 				>
 					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
@@ -144,9 +115,15 @@ export default function Component() {
 				</Slider.Root>
 			</div>
 			<div className="flex flex-col col-span-2 lg:col-span-1">
-				<label htmlFor="contrast" className="text-xs">
-					Contrast
-				</label>
+				<div className="flex justify-between text-xs">
+					<label htmlFor="contrast">Contrast</label>
+					{contrast[0] !== 100 && (
+						<i
+							onClick={() => setContrast([100])}
+							className="ri-loop-left-line hover:text-neutral-50 hover:-rotate-180 cursor-pointer duration-300 ease-in-out"
+						/>
+					)}
+				</div>
 				<Slider.Root
 					name="contrast"
 					className="group relative flex items-center select-none touch-none w-full h-5 cursor-pointer"
@@ -155,8 +132,6 @@ export default function Component() {
 					defaultValue={contrast}
 					max={500}
 					step={1}
-					onMouseEnter={() => setFocus("contrast")}
-					onMouseLeave={() => setFocus("")}
 				>
 					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
@@ -168,9 +143,15 @@ export default function Component() {
 				</Slider.Root>
 			</div>
 			<div className="flex flex-col col-span-2 lg:col-span-1">
-				<label htmlFor="hueRotate" className="text-xs">
-					Hue rotate
-				</label>
+				<div className="flex justify-between text-xs">
+					<label htmlFor="hueRotate">Hue rotate</label>
+					{hueRotate[0] !== 0 && (
+						<i
+							onClick={() => setHueRotate([0])}
+							className="ri-loop-left-line hover:text-neutral-50 hover:-rotate-180 cursor-pointer duration-300 ease-in-out"
+						/>
+					)}
+				</div>
 				<Slider.Root
 					name="hueRotate"
 					className="group relative flex items-center select-none touch-none w-full h-5 cursor-pointer"
@@ -180,8 +161,6 @@ export default function Component() {
 					min={-180}
 					max={180}
 					step={1}
-					onMouseEnter={() => setFocus("hueRotate")}
-					onMouseLeave={() => setFocus("")}
 				>
 					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
@@ -193,9 +172,15 @@ export default function Component() {
 				</Slider.Root>
 			</div>
 			<div className="flex flex-col col-span-2 lg:col-span-1">
-				<label htmlFor="invert" className="text-xs">
-					Invert
-				</label>
+				<div className="flex justify-between text-xs">
+					<label htmlFor="invert">Invert</label>
+					{invert[0] !== 0 && (
+						<i
+							onClick={() => setInvert([0])}
+							className="ri-loop-left-line hover:text-neutral-50 hover:-rotate-180 cursor-pointer duration-300 ease-in-out"
+						/>
+					)}
+				</div>
 				<Slider.Root
 					name="invert"
 					className="group relative flex items-center select-none touch-none w-full h-5 cursor-pointer"
@@ -204,8 +189,6 @@ export default function Component() {
 					defaultValue={invert}
 					max={100}
 					step={1}
-					onMouseEnter={() => setFocus("invert")}
-					onMouseLeave={() => setFocus("")}
 				>
 					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
@@ -217,9 +200,15 @@ export default function Component() {
 				</Slider.Root>
 			</div>
 			<div className="flex flex-col col-span-2 lg:col-span-1">
-				<label htmlFor="invert" className="text-xs">
-					Saturate
-				</label>
+				<div className="flex justify-between text-xs">
+					<label htmlFor="invert">Saturate</label>
+					{saturate[0] !== 100 && (
+						<i
+							onClick={() => setSaturate([100])}
+							className="ri-loop-left-line hover:text-neutral-50 hover:-rotate-180 cursor-pointer duration-300 ease-in-out"
+						/>
+					)}
+				</div>
 				<Slider.Root
 					name="saturate"
 					className="group relative flex items-center select-none touch-none w-full h-5 cursor-pointer"
@@ -228,8 +217,6 @@ export default function Component() {
 					defaultValue={saturate}
 					max={500}
 					step={1}
-					onMouseEnter={() => setFocus("saturate")}
-					onMouseLeave={() => setFocus("")}
 				>
 					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
@@ -241,9 +228,15 @@ export default function Component() {
 				</Slider.Root>
 			</div>
 			<div className="flex flex-col col-span-2 lg:col-span-1">
-				<label htmlFor="invert" className="text-xs">
-					Sepia
-				</label>
+				<div className="flex justify-between text-xs">
+					<label htmlFor="invert">Sepia</label>
+					{sepia[0] !== 0 && (
+						<i
+							onClick={() => setSepia([0])}
+							className="ri-loop-left-line hover:text-neutral-50 hover:-rotate-180 cursor-pointer duration-300 ease-in-out"
+						/>
+					)}
+				</div>
 				<Slider.Root
 					name="sepia"
 					className="group relative flex items-center select-none touch-none w-full h-5 cursor-pointer"
@@ -252,8 +245,6 @@ export default function Component() {
 					defaultValue={sepia}
 					max={100}
 					step={1}
-					onMouseEnter={() => setFocus("sepia")}
-					onMouseLeave={() => setFocus("")}
 				>
 					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
@@ -266,6 +257,7 @@ export default function Component() {
 			</div>
 			<div className="grid col-span-2 justify-end">
 				<Button
+					disabled={allFilters.length < 1}
 					onClick={() => {
 						setBrightness([100]);
 						setContrast([100]);
@@ -275,7 +267,7 @@ export default function Component() {
 						setSepia([0]);
 					}}
 				>
-					<i className="ri-loop-left-line" />
+					<i className="ri-loop-left-line group-hover:-rotate-180 duration-300 ease-in-out" />
 					Reset all
 				</Button>
 			</div>
