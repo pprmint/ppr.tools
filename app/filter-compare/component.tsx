@@ -64,9 +64,9 @@ export default function Component() {
 						backgroundColor: `#${sourceColor}`,
 						filter: allFilters,
 					}}
-					className="w-full h-24 rounded-l-lg"
+					className="w-full h-12 lg:h-24 rounded-l-lg"
 				/>
-				<div style={{ backgroundColor: `#${targetColor}` }} className="w-full h-24 rounded-r-lg" />
+				<div style={{ backgroundColor: `#${targetColor}` }} className="w-full h-12 lg:h-24 rounded-r-lg" />
 			</div>
 			<div className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3">
 				<p className="flex-grow">
@@ -112,14 +112,14 @@ export default function Component() {
 						} duration-100`}
 					>
 						sepia({sepia}%)
-					</span>{" "}
+					</span>;
 				</p>
 				<i
 					className="ri-clipboard-line cursor-pointer hover:text-neutral-50 duration-100"
-					onClick={() => navigator.clipboard.writeText(`filter: ${allFilters}`)}
+					onClick={() => navigator.clipboard.writeText(`filter: ${allFilters};`)}
 				/>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex flex-col col-span-2 lg:col-span-1">
 				<label htmlFor="brightness" className="text-xs">
 					Brightness
 				</label>
@@ -143,7 +143,7 @@ export default function Component() {
 					/>
 				</Slider.Root>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex flex-col col-span-2 lg:col-span-1">
 				<label htmlFor="contrast" className="text-xs">
 					Contrast
 				</label>
@@ -167,7 +167,7 @@ export default function Component() {
 					/>
 				</Slider.Root>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex flex-col col-span-2 lg:col-span-1">
 				<label htmlFor="hueRotate" className="text-xs">
 					Hue rotate
 				</label>
@@ -192,7 +192,7 @@ export default function Component() {
 					/>
 				</Slider.Root>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex flex-col col-span-2 lg:col-span-1">
 				<label htmlFor="invert" className="text-xs">
 					Invert
 				</label>
@@ -216,7 +216,7 @@ export default function Component() {
 					/>
 				</Slider.Root>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex flex-col col-span-2 lg:col-span-1">
 				<label htmlFor="invert" className="text-xs">
 					Saturate
 				</label>
@@ -240,7 +240,7 @@ export default function Component() {
 					/>
 				</Slider.Root>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex flex-col col-span-2 lg:col-span-1">
 				<label htmlFor="invert" className="text-xs">
 					Sepia
 				</label>
@@ -276,7 +276,7 @@ export default function Component() {
 					}}
 				>
 					<i className="ri-loop-left-line" />
-					Reset
+					Reset all
 				</Button>
 			</div>
 		</div>
