@@ -17,8 +17,8 @@ const Links = [
 		icon: "ri-file-list-2-line",
 	},
 	{
-		name: "CSS Filter Compare",
-		path: "/filter-compare",
+		name: "CSS filter to color",
+		path: "/filter-color",
 		icon: "ri-contrast-line",
 	},
 ];
