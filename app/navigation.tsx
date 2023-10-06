@@ -21,6 +21,11 @@ const Links = [
 		path: "/filter-color",
 		icon: "ri-contrast-line",
 	},
+	//{
+	//	name: "Cubic bézier",
+	//	path: "/cubic-bezier",
+	//	icon: "ri-pulse-line",
+	//},
 ];
 
 export default function Navigation() {
