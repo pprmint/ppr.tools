@@ -109,7 +109,7 @@ export default function Component() {
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-blue w-3 h-3 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Brightness"
 					/>
 				</Slider.Root>
@@ -137,7 +137,7 @@ export default function Component() {
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-blue w-3 h-3 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Contrast"
 					/>
 				</Slider.Root>
@@ -166,7 +166,7 @@ export default function Component() {
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-blue w-3 h-3 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Hue rotate"
 					/>
 				</Slider.Root>
@@ -194,7 +194,7 @@ export default function Component() {
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-blue w-3 h-3 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Invert"
 					/>
 				</Slider.Root>
@@ -222,7 +222,7 @@ export default function Component() {
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-blue w-3 h-3 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Saturate"
 					/>
 				</Slider.Root>
@@ -250,7 +250,7 @@ export default function Component() {
 						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-blue w-3 h-3 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Sepia"
 					/>
 				</Slider.Root>
