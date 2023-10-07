@@ -8,6 +8,7 @@ import "fonts/BasierSquareMono/basiersquaremono.css";
 import "remixicon/fonts/remixicon.css";
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://tools.ppr.one"),
 	title: "Some tools.",
 	description: "A small site with random small tools.",
 	themeColor: "#1199ff",
