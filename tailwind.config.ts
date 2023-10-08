@@ -63,6 +63,9 @@ const config: Config = {
 					"Consolas",
 				],
 			},
+			screens: {
+				"3xl": "1800px",
+			},
 			keyframes: {
 				pageIn: {
 					from: {
@@ -75,9 +78,9 @@ const config: Config = {
 					},
 				},
 			},
-            animation: {
-                "page-in": "pageIn .5s cubic-bezier(0.16, 1, 0.3, 1)"
-            }
+			animation: {
+				"page-in": "pageIn .5s cubic-bezier(0.16, 1, 0.3, 1)",
+			},
 		},
 	},
 	plugins: [],

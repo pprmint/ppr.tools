@@ -12,12 +12,46 @@ export default function Component() {
 	}, ${parseFloat((1 - (positionB.y - 200) / 400).toFixed(2))}`;
 
 	const [duration, setDuration] = useState([0.5]);
+	const [transitionDisabled, setTransitionDisabled] = useState(true);
+
+	const Examples = [
+		{
+			name: "ease-in sine",
+			positionA: { x: 48, y: 600 },
+			positionB: { x: 156, y: 600 },
+		},
+		{
+			name: "ease-out sine",
+			positionA: { x: 244, y: 200 },
+			positionB: { x: 352, y: 200 },
+		},
+		{
+			name: "ease-in-out sine",
+			positionA: { x: 148, y: 600 },
+			positionB: { x: 248, y: 200 },
+		},
+	];
+
+	async function handleEasingClickA(newPosition: { x: number; y: number }) {
+		setTransitionDisabled(false);
+		setPositionA({ x: newPosition.x, y: newPosition.y });
+		setTimeout(() => {
+			setTransitionDisabled(true);
+		}, 300);
+	}
+	async function handleEasingClickB(newPosition: { x: number; y: number }) {
+		setTransitionDisabled(false);
+		setPositionB({ x: newPosition.x, y: newPosition.y });
+		setTimeout(() => {
+			setTransitionDisabled(true);
+		}, 300);
+	}
 
 	return (
 		<div className="flex flex-col 2xl:flex-row gap-9">
 			<div className="flex w-max">
 				<div className="relative w-[424px] h-[824px]">
-					<svg width={400} height={800} xmlns="http://www.w3.org/2000/svg" className="absolute left-0">
+					<svg width={400} height={800} xmlns="http://www.w3.org/2000/svg" className="group absolute left-0">
 						<g id="backdrop">
 							<rect x={1} y={201} width={398} height={398} fill="transparent" strokeWidth={2} stroke="#222" />
 							<rect
@@ -185,26 +219,36 @@ export default function Component() {
 								strokeWidth={2}
 								strokeLinecap="round"
 								fill="transparent"
+								className={`${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 							<path
-								d={`M0,600 ${positionA.x},${positionA.y}`}
+								d={`M0,600 ${positionA.x + 0.5},${positionA.y + 0.5}`}
 								stroke="#1181d6"
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
+								className={`${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 							<path
-								d={`M400,200 ${positionB.x},${positionB.y}`}
+								d={`M400,200 ${positionB.x + 0.5},${positionB.y + 0.5}`}
 								stroke="#115180"
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
+								className={`${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 						</g>
 					</svg>
 					<Draggable
 						bounds="parent"
 						grid={[4, 4]}
+						position={positionA}
 						defaultPosition={positionA}
 						onDrag={(e, position) => {
 							const { x, y } = position;
@@ -212,11 +256,16 @@ export default function Component() {
 						}}
 						positionOffset={{ x: "-11.5px", y: "-11.5px" }}
 					>
-						<div className="absolute w-[24px] h-[24px] rounded-full bg-blue cursor-grab active:cursor-grabbing" />
+						<div
+							className={`absolute w-[24px] h-[24px] rounded-full bg-blue cursor-grab active:cursor-grabbing ${
+								transitionDisabled ? "duration-0" : "duration-300"
+							} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+						/>
 					</Draggable>
 					<Draggable
 						bounds="parent"
 						grid={[4, 4]}
+						position={positionB}
 						defaultPosition={positionB}
 						onDrag={(e, position) => {
 							const { x, y } = position;
@@ -224,7 +273,11 @@ export default function Component() {
 						}}
 						positionOffset={{ x: "-11.5px", y: "-11.5px" }}
 					>
-						<div className="absolute w-[24px] h-[24px] rounded-full bg-blue-700 cursor-grab active:cursor-grabbing" />
+						<div
+							className={`absolute w-[24px] h-[24px] rounded-full bg-blue-700 cursor-grab active:cursor-grabbing ${
+								transitionDisabled ? "duration-0" : "duration-300"
+							} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+						/>
 					</Draggable>
 				</div>
 			</div>
@@ -286,6 +339,44 @@ export default function Component() {
 							style={{ transition: `all ${duration}s cubic-bezier(${cubicBezier})` }}
 						/>
 					</div>
+				</div>
+				<p>
+					x: {positionA.x}, y: {positionA.y}
+				</p>
+				<p>
+					x: {positionB.x}, y: {positionB.y}
+				</p>
+				<p>{transitionDisabled}</p>
+				<div className="grid grid-cols-3 xl:grid-cols-6 2xl:grid-cols-3 3xl:grid-cols-6 gap-6">
+					{Examples.map((easing) => (
+						<button
+							key={easing.name}
+							onClick={() => {
+								handleEasingClickA(easing.positionA);
+								handleEasingClickB(easing.positionB);
+							}}
+						>
+							<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900">
+								<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
+									<path
+										d="M4,200 V600 H400"
+										fill="transparent"
+										stroke="#444"
+										strokeWidth={8}
+										strokeDasharray={17}
+									/>
+									<path
+										d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,200`}
+										stroke="#19f"
+										strokeWidth={8}
+										strokeLinecap="round"
+										fill="transparent"
+									/>
+								</svg>
+							</div>
+							<p className="text-xs">{easing.name}</p>
+						</button>
+					))}
 				</div>
 			</div>
 		</div>
