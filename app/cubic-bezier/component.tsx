@@ -3,6 +3,71 @@ import { useState } from "react";
 import Draggable from "react-draggable";
 import * as Slider from "@radix-ui/react-slider";
 
+import "./animate.css";
+
+const Examples = [
+	{
+		name: "in sine",
+		positionA: { x: 48, y: 600 },
+		positionB: { x: 156, y: 600 },
+	},
+	{
+		name: "out sine",
+		positionA: { x: 244, y: 200 },
+		positionB: { x: 352, y: 200 },
+	},
+	{
+		name: "in-out sine",
+		positionA: { x: 148, y: 600 },
+		positionB: { x: 248, y: 200 },
+	},
+	{
+		name: "in quad",
+		positionA: { x: 44, y: 600 },
+		positionB: { x: 200, y: 600 },
+	},
+	{
+		name: "out quad",
+		positionA: { x: 200, y: 200 },
+		positionB: { x: 356, y: 200 },
+	},
+	{
+		name: "in-out quad",
+		positionA: { x: 180, y: 600 },
+		positionB: { x: 220, y: 200 },
+	},
+	{
+		name: "in cubic",
+		positionA: { x: 128, y: 600 },
+		positionB: { x: 268, y: 200 },
+	},
+	{
+		name: "out cubic",
+		positionA: { x: 132, y: 200 },
+		positionB: { x: 272, y: 200 },
+	},
+	{
+		name: "in-out cubic",
+		positionA: { x: 260, y: 600 },
+		positionB: { x: 140, y: 200 },
+	},
+	{
+		name: "in quart",
+		positionA: { x: 200, y: 600 },
+		positionB: { x: 300, y: 600 },
+	},
+	{
+		name: "out quart",
+		positionA: { x: 100, y: 200 },
+		positionB: { x: 200, y: 200 },
+	},
+	{
+		name: "in-out quart",
+		positionA: { x: 304, y: 600 },
+		positionB: { x: 96, y: 200 },
+	},
+];
+
 export default function Component() {
 	const [positionA, setPositionA] = useState({ x: 200, y: 560 });
 	const [positionB, setPositionB] = useState({ x: 200, y: 240 });
@@ -11,26 +76,8 @@ export default function Component() {
 		positionB.x / 400
 	}, ${parseFloat((1 - (positionB.y - 200) / 400).toFixed(2))}`;
 
-	const [duration, setDuration] = useState([0.5]);
+	const [duration, setDuration] = useState([1]);
 	const [transitionDisabled, setTransitionDisabled] = useState(true);
-
-	const Examples = [
-		{
-			name: "ease-in sine",
-			positionA: { x: 48, y: 600 },
-			positionB: { x: 156, y: 600 },
-		},
-		{
-			name: "ease-out sine",
-			positionA: { x: 244, y: 200 },
-			positionB: { x: 352, y: 200 },
-		},
-		{
-			name: "ease-in-out sine",
-			positionA: { x: 148, y: 600 },
-			positionB: { x: 248, y: 200 },
-		},
-	];
 
 	async function handleEasingClickA(newPosition: { x: number; y: number }) {
 		setTransitionDisabled(false);
@@ -50,19 +97,11 @@ export default function Component() {
 	return (
 		<div className="flex flex-col 2xl:flex-row gap-9">
 			<div className="flex w-max">
-				<div className="relative w-[424px] h-[824px]">
+				<div className="relative flex-row w-[424px] h-[824px]">
 					<svg width={400} height={800} xmlns="http://www.w3.org/2000/svg" className="group absolute left-0">
 						<g id="backdrop">
 							<rect x={1} y={201} width={398} height={398} fill="transparent" strokeWidth={2} stroke="#222" />
-							<rect
-								x={0.5}
-								y={0.5}
-								width={399}
-								height={799}
-								fill="transparent"
-								strokeWidth={1}
-								stroke="#222"
-							/>
+							<rect x={0.5} y={0.5} width={399} height={799} fill="transparent" strokeWidth={1} stroke="#222" />
 							<g id="vertical">
 								<path
 									d="M40.5,200 40.5,600"
@@ -211,6 +250,7 @@ export default function Component() {
 									strokeDashoffset={1.5}
 								/>
 							</g>
+							<path d="M1,200 V599 H400" fill="transparent" stroke="#333" strokeWidth={2} />
 						</g>
 						<g id="draw">
 							<path
@@ -219,9 +259,7 @@ export default function Component() {
 								strokeWidth={2}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 							<path
 								d={`M0,600 ${positionA.x + 0.5},${positionA.y + 0.5}`}
@@ -229,9 +267,7 @@ export default function Component() {
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 							<path
 								d={`M400,200 ${positionB.x + 0.5},${positionB.y + 0.5}`}
@@ -239,12 +275,19 @@ export default function Component() {
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 						</g>
 					</svg>
+					<div className="absolute p-3 text-xs text-neutral-900">
+                        TESTING
+						<p>
+							<b>A</b> x: {positionA.x}, y: {positionA.y}
+						</p>
+						<p>
+							<b>B</b> x: {positionB.x}, y: {positionB.y}
+						</p>
+					</div>
 					<Draggable
 						bounds="parent"
 						grid={[4, 4]}
@@ -340,12 +383,6 @@ export default function Component() {
 						/>
 					</div>
 				</div>
-				<p>
-					x: {positionA.x}, y: {positionA.y}
-				</p>
-				<p>
-					x: {positionB.x}, y: {positionB.y}
-				</p>
 				<p>{transitionDisabled}</p>
 				<div className="grid grid-cols-3 xl:grid-cols-6 2xl:grid-cols-3 3xl:grid-cols-6 gap-6">
 					{Examples.map((easing) => (
@@ -355,16 +392,25 @@ export default function Component() {
 								handleEasingClickA(easing.positionA);
 								handleEasingClickB(easing.positionB);
 							}}
+							className="group relative"
 						>
-							<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900">
+							<svg
+								viewBox="0 0 100 100"
+								xmlns="http://www.w3.org/2000/svg"
+								className="absolute top-0 left-0 w-full h-auto opacity-0 group-hover:opacity-100 duration-200 animate-rotate"
+								style={{
+									animationDuration: `${duration}s`,
+									// jesus christ
+									animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${
+										1 - (easing.positionA.y - 200) / 400
+									}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - 200) / 400})`,
+								}}
+							>
+								<circle cx="50" cy="5" r="5" fill="#19f" />
+							</svg>
+							<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900 group-hover:bg-neutral-800 duration-200">
 								<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
-									<path
-										d="M4,200 V600 H400"
-										fill="transparent"
-										stroke="#444"
-										strokeWidth={8}
-										strokeDasharray={17}
-									/>
+									<path d="M4,200 V600 H400" fill="transparent" stroke="#555" strokeWidth={8} strokeDasharray={17} />
 									<path
 										d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,200`}
 										stroke="#19f"
@@ -374,7 +420,7 @@ export default function Component() {
 									/>
 								</svg>
 							</div>
-							<p className="text-xs">{easing.name}</p>
+							<p className="text-xs group-hover:text-neutral-50 duration-200">{easing.name}</p>
 						</button>
 					))}
 				</div>
