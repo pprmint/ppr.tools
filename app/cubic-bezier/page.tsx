@@ -8,7 +8,7 @@ export default function CubicBezier() {
 					Cubic bézier.
 				</h1>
 				<p>
-					Drag the dots around to create a bézier curve, which you can use for easings in CSS animations.
+					Drag the dots around to create a bézier curve, and test some transitions by hovering over the boxes.
 				</p>
 			</section>
 			<section>
