@@ -31,7 +31,7 @@ const Links = [
 export default function Navigation() {
 	const path = usePathname();
 	return (
-		<nav className="md:rounded-r-3xl bg-neutral-900 flex flex-col w-full px-6 py-3 md:py-6 lg:p-9 md:gap-3 overflow-x-auto">
+		<nav className="fixed md:relative md:rounded-r-3xl bg-neutral-900 flex flex-col w-full md:max-w-sm px-6 py-3 md:py-6 lg:p-9 md:gap-3 overflow-x-auto">
 			<div className="flex md:flex-col whitespace-nowrap md:whitespace-normal gap-3 md:flex-grow">
 				<Image src={Logo} alt="tools logo" className="h-6 md:h-9 lg:h-12 w-auto mt-1.5 md:mt-0 md:mb-6" />
 				{Links.map((link) => (
