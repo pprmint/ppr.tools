@@ -77,9 +77,35 @@ const config: Config = {
 						transform: "translateY(0px)",
 					},
 				},
+				collapsibleDown: {
+					from: {
+						height: "0px",
+                        paddingTop: "0",
+                        opacity: "0%",
+					},
+					to: {
+						height: "var(--radix-collapsible-content-height)",
+                        paddingTop: "24px",
+                        opacity: "100%",
+					},
+				},
+				collapsibleUp: {
+					from: {
+						height: "var(--radix-collapsible-content-height)",
+                        paddingTop: "24px",
+                        opacity: "100%",
+					},
+					to: {
+						height: "0px",
+                        paddingTop: "0px",
+                        opacity: "0%",
+					},
+				},
 			},
 			animation: {
 				"page-in": "pageIn .5s cubic-bezier(0.16, 1, 0.3, 1)",
+				"collapsible-down": "collapsibleDown .5s cubic-bezier(0.16, 1, 0.3, 1)",
+				"collapsible-up": "collapsibleUp .5s cubic-bezier(0.16, 1, 0.3, 1)",
 			},
 		},
 	},

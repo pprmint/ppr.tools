@@ -8,62 +8,74 @@ import "./animate.css";
 
 const Presets = [
 	{
-		name: "in sine",
+		type: "in",
+		group: "sine",
 		positionA: { x: 48, y: 600 },
 		positionB: { x: 156, y: 600 },
 	},
 	{
-		name: "out sine",
+		type: "out",
+		group: "sine",
 		positionA: { x: 244, y: 200 },
 		positionB: { x: 352, y: 200 },
 	},
 	{
-		name: "in-out sine",
+		type: "in-out",
+		group: "sine",
 		positionA: { x: 148, y: 600 },
 		positionB: { x: 248, y: 200 },
 	},
 	{
-		name: "in quad",
+		type: "in",
+		group: "quad",
 		positionA: { x: 44, y: 600 },
 		positionB: { x: 200, y: 600 },
 	},
 	{
-		name: "out quad",
+		type: "out",
+		group: "quad",
 		positionA: { x: 200, y: 200 },
 		positionB: { x: 356, y: 200 },
 	},
 	{
-		name: "in-out quad",
+		type: "in-out",
+		group: "quad",
 		positionA: { x: 180, y: 600 },
 		positionB: { x: 220, y: 200 },
 	},
 	{
-		name: "in cubic",
+		type: "in",
+		group: "cubic",
 		positionA: { x: 128, y: 600 },
 		positionB: { x: 268, y: 200 },
 	},
 	{
-		name: "out cubic",
+		type: "out",
+		group: "cubic",
 		positionA: { x: 132, y: 200 },
 		positionB: { x: 272, y: 200 },
 	},
 	{
-		name: "in-out cubic",
+		type: "in-out",
+		group: "cubic",
 		positionA: { x: 260, y: 600 },
 		positionB: { x: 140, y: 200 },
 	},
 	{
-		name: "in quart",
+		type: "in",
+		group: "quart",
 		positionA: { x: 200, y: 600 },
 		positionB: { x: 300, y: 600 },
 	},
 	{
-		name: "out quart",
+		type: "out",
+		group: "quart",
 		positionA: { x: 100, y: 200 },
 		positionB: { x: 200, y: 200 },
 	},
 	{
-		name: "in-out quart",
+		type: "in-out",
+		group: "quart",
 		positionA: { x: 304, y: 600 },
 		positionB: { x: 96, y: 200 },
 	},
@@ -382,10 +394,10 @@ export default function Component() {
 						/>
 					</Slider.Root>
 				</div>
-				<div id="previews" className="grid grid-cols-3 gap-6">
+				<div id="previews" className="grid grid-cols-3 gap-6 z-10">
 					<div className="group relative w-full h-32 col-span-3 bg-neutral-900 rounded-lg">
 						<div
-							className="absolute left-0 group-hover:left-full group-hover:-translate-x-full w-[calc(33%-15px)] h-full bg-blue rounded-lg"
+							className="absolute left-0 group-hover:left-full group-hover:-translate-x-full w-[calc(33%-14px)] h-full bg-blue rounded-lg"
 							style={{ transition: `all ${duration}s cubic-bezier(${cubicBezier})` }}
 						/>
 					</div>
@@ -422,10 +434,10 @@ export default function Component() {
 						</Collapsible.Trigger>
 						<hr className="border-neutral-50 flex-grow" />
 					</div>
-					<Collapsible.Content className="grid grid-cols-3 xl:grid-cols-6 2xl:grid-cols-3 3xl:grid-cols-6 gap-6">
+					<Collapsible.Content className="grid grid-cols-3 xl:grid-cols-6 2xl:grid-cols-3 3xl:grid-cols-6 gap-6 pt-6 data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up overflow-hidden">
 						{Presets.map((easing) => (
 							<button
-								key={easing.name}
+								key={easing.type + easing.group}
 								onClick={() => {
 									handleEasingClickA(easing.positionA);
 									handleEasingClickB(easing.positionB);
@@ -456,15 +468,34 @@ export default function Component() {
 											strokeDasharray={17}
 										/>
 										<path
-											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,200`}
-											stroke="#19f"
+											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,198`}
+											stroke={`url(#${easing.type})`}
 											strokeWidth={8}
 											strokeLinecap="round"
 											fill="transparent"
 										/>
+										<defs>
+											<linearGradient id="in" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+												<stop stop-color="#eee" />
+												<stop offset="50%" stop-color="#eee" />
+												<stop offset="100%" stop-color="#19f" />
+											</linearGradient>
+											<linearGradient id="out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+												<stop stop-color="#19f" />
+												<stop offset="50%" stop-color="#eee" />
+												<stop offset="100%" stop-color="#eee" />
+											</linearGradient>
+											<linearGradient id="in-out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+												<stop stop-color="#19f" />
+												<stop offset="50%" stop-color="#eee" />
+												<stop offset="100%" stop-color="#19f" />
+											</linearGradient>
+										</defs>
 									</svg>
 								</div>
-								<p className="text-xs group-hover:text-neutral-50 duration-200">{easing.name}</p>
+								<p className="text-xs group-hover:text-neutral-50 duration-200">
+									{easing.type} <span className="font-medium text-neutral-50">{easing.group}</span>
+								</p>
 							</button>
 						))}
 					</Collapsible.Content>
