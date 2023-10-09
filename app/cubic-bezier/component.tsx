@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Draggable from "react-draggable";
 import * as Slider from "@radix-ui/react-slider";
+import * as Collapsible from "@radix-ui/react-collapsible";
 
 import "./animate.css";
 
-const Examples = [
+const Presets = [
 	{
 		name: "in sine",
 		positionA: { x: 48, y: 600 },
@@ -69,16 +70,23 @@ const Examples = [
 ];
 
 export default function Component() {
+	// Position of draggable handles.
 	const [positionA, setPositionA] = useState({ x: 200, y: 560 });
 	const [positionB, setPositionB] = useState({ x: 200, y: 240 });
 
+	// Get cubic-bezier from positions of handles; rounded to two decimals after comma.
 	const cubicBezier = `${positionA.x / 400}, ${parseFloat((1 - (positionA.y - 200) / 400).toFixed(2))}, ${
 		positionB.x / 400
 	}, ${parseFloat((1 - (positionB.y - 200) / 400).toFixed(2))}`;
 
+	// Duration of animation previews (boxes on hover, spinny circle for easing presets).
 	const [duration, setDuration] = useState([1]);
 	const [transitionDisabled, setTransitionDisabled] = useState(true);
 
+	// Collapsible for easing presets.
+	const [presetsVisible, setPresetsVisible] = useState(false);
+
+	// Functions to handle selection of easing presets.
 	async function handleEasingClickA(newPosition: { x: number; y: number }) {
 		setTransitionDisabled(false);
 		setPositionA({ x: newPosition.x, y: newPosition.y });
@@ -101,7 +109,15 @@ export default function Component() {
 					<svg width={400} height={800} xmlns="http://www.w3.org/2000/svg" className="group absolute left-0">
 						<g id="backdrop">
 							<rect x={1} y={201} width={398} height={398} fill="transparent" strokeWidth={2} stroke="#222" />
-							<rect x={0.5} y={0.5} width={399} height={799} fill="transparent" strokeWidth={1} stroke="#222" />
+							<rect
+								x={0.5}
+								y={0.5}
+								width={399}
+								height={799}
+								fill="transparent"
+								strokeWidth={1}
+								stroke="#222"
+							/>
 							<g id="vertical">
 								<path
 									d="M40.5,200 40.5,600"
@@ -259,7 +275,9 @@ export default function Component() {
 								strokeWidth={2}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 							<path
 								d={`M0,600 ${positionA.x + 0.5},${positionA.y + 0.5}`}
@@ -267,7 +285,9 @@ export default function Component() {
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 							<path
 								d={`M400,200 ${positionB.x + 0.5},${positionB.y + 0.5}`}
@@ -275,12 +295,14 @@ export default function Component() {
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
 							/>
 						</g>
 					</svg>
 					<div className="absolute p-3 text-xs text-neutral-900">
-                        TESTING
+						TESTING
 						<p>
 							<b>A</b> x: {positionA.x}, y: {positionA.y}
 						</p>
@@ -325,7 +347,10 @@ export default function Component() {
 				</div>
 			</div>
 			<div className="w-full flex flex-col gap-6">
-				<div className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full">
+				<div
+					id="cubic-bezier-code"
+					className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full"
+				>
 					<p className="flex-grow">
 						cubic-bezier(<span className="text-neutral-50">{cubicBezier}</span>);
 					</p>
@@ -334,7 +359,7 @@ export default function Component() {
 						onClick={() => navigator.clipboard.writeText(`cubic-bezier(${cubicBezier})`)}
 					/>
 				</div>
-				<div>
+				<div id="duration-controls">
 					<div className="flex justify-between text-xs">
 						<label htmlFor="duration">Transition duration</label>
 						<p>{duration}s</p>
@@ -357,7 +382,7 @@ export default function Component() {
 						/>
 					</Slider.Root>
 				</div>
-				<div className="grid grid-cols-3 gap-6">
+				<div id="previews" className="grid grid-cols-3 gap-6">
 					<div className="group relative w-full h-32 col-span-3 bg-neutral-900 rounded-lg">
 						<div
 							className="absolute left-0 group-hover:left-full group-hover:-translate-x-full w-[calc(33%-15px)] h-full bg-blue rounded-lg"
@@ -383,47 +408,67 @@ export default function Component() {
 						/>
 					</div>
 				</div>
-				<p>{transitionDisabled}</p>
-				<div className="grid grid-cols-3 xl:grid-cols-6 2xl:grid-cols-3 3xl:grid-cols-6 gap-6">
-					{Examples.map((easing) => (
-						<button
-							key={easing.name}
-							onClick={() => {
-								handleEasingClickA(easing.positionA);
-								handleEasingClickB(easing.positionB);
-							}}
-							className="group relative"
-						>
-							<svg
-								viewBox="0 0 100 100"
-								xmlns="http://www.w3.org/2000/svg"
-								className="absolute top-0 left-0 w-full h-auto opacity-0 group-hover:opacity-100 duration-200 animate-rotate"
-								style={{
-									animationDuration: `${duration}s`,
-									// jesus christ
-									animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${
-										1 - (easing.positionA.y - 200) / 400
-									}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - 200) / 400})`,
+				<Collapsible.Root open={presetsVisible} onOpenChange={setPresetsVisible}>
+					<div className="flex items-baseline gap-6 text-xl">
+						<Collapsible.Trigger asChild>
+							<button onClick={() => setPresetsVisible(!presetsVisible)} className="flex gap-3">
+								<h2 className="font-display text-neutral-50">Presets</h2>
+								<i
+									className={`ri-arrow-down-s-line ${
+										presetsVisible ? "rotate-180" : "rotate-0"
+									} duration-200 ease-out`}
+								/>
+							</button>
+						</Collapsible.Trigger>
+						<hr className="border-neutral-50 flex-grow" />
+					</div>
+					<Collapsible.Content className="grid grid-cols-3 xl:grid-cols-6 2xl:grid-cols-3 3xl:grid-cols-6 gap-6">
+						{Presets.map((easing) => (
+							<button
+								key={easing.name}
+								onClick={() => {
+									handleEasingClickA(easing.positionA);
+									handleEasingClickB(easing.positionB);
 								}}
+								className="group relative"
 							>
-								<circle cx="50" cy="5" r="5" fill="#19f" />
-							</svg>
-							<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900 group-hover:bg-neutral-800 duration-200">
-								<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
-									<path d="M4,200 V600 H400" fill="transparent" stroke="#555" strokeWidth={8} strokeDasharray={17} />
-									<path
-										d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,200`}
-										stroke="#19f"
-										strokeWidth={8}
-										strokeLinecap="round"
-										fill="transparent"
-									/>
+								<svg
+									viewBox="0 0 100 100"
+									xmlns="http://www.w3.org/2000/svg"
+									className="absolute top-0 left-0 w-full h-auto opacity-0 group-hover:opacity-100 duration-200 animate-rotate"
+									style={{
+										animationDuration: `${duration}s`,
+										// jesus christ
+										animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${
+											1 - (easing.positionA.y - 200) / 400
+										}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - 200) / 400})`,
+									}}
+								>
+									<circle cx="50" cy="5" r="5" fill="#19f" />
 								</svg>
-							</div>
-							<p className="text-xs group-hover:text-neutral-50 duration-200">{easing.name}</p>
-						</button>
-					))}
-				</div>
+								<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900 group-hover:bg-neutral-800 duration-200">
+									<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
+										<path
+											d="M4,200 V600 H400"
+											fill="transparent"
+											stroke="#555"
+											strokeWidth={8}
+											strokeDasharray={17}
+										/>
+										<path
+											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,200`}
+											stroke="#19f"
+											strokeWidth={8}
+											strokeLinecap="round"
+											fill="transparent"
+										/>
+									</svg>
+								</div>
+								<p className="text-xs group-hover:text-neutral-50 duration-200">{easing.name}</p>
+							</button>
+						))}
+					</Collapsible.Content>
+				</Collapsible.Root>
 			</div>
 		</div>
 	);
