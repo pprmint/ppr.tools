@@ -79,6 +79,42 @@ const Presets = [
 		positionA: { x: 304, y: 600 },
 		positionB: { x: 96, y: 200 },
 	},
+	{
+		type: "in",
+		group: "quint",
+		positionA: { x: 256, y: 600 },
+		positionB: { x: 312, y: 600 },
+	},
+	{
+		type: "out",
+		group: "quint",
+		positionA: { x: 88, y: 200 },
+		positionB: { x: 144, y: 200 },
+	},
+	{
+		type: "in-out",
+		group: "quint",
+		positionA: { x: 332, y: 600 },
+		positionB: { x: 68, y: 200 },
+	},
+	{
+		type: "in",
+		group: "expo",
+		positionA: { x: 280, y: 600 },
+		positionB: { x: 312, y: 600 },
+	},
+	{
+		type: "out",
+		group: "expo",
+		positionA: { x: 64, y: 200 },
+		positionB: { x: 144, y: 200 },
+	},
+	{
+		type: "in-out",
+		group: "expo",
+		positionA: { x: 348, y: 600 },
+		positionB: { x: 52, y: 200 },
+	},
 ];
 
 export default function Component() {
@@ -468,7 +504,7 @@ export default function Component() {
 											strokeDasharray={17}
 										/>
 										<path
-											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 396,198`}
+											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 394,196`}
 											stroke={`url(#${easing.type})`}
 											strokeWidth={8}
 											strokeLinecap="round"
@@ -477,17 +513,18 @@ export default function Component() {
 										<defs>
 											<linearGradient id="in" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
 												<stop stop-color="#eee" />
-												<stop offset="50%" stop-color="#eee" />
+												<stop offset="75%" stop-color="#eee" />
 												<stop offset="100%" stop-color="#19f" />
 											</linearGradient>
 											<linearGradient id="out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
 												<stop stop-color="#19f" />
-												<stop offset="50%" stop-color="#eee" />
+												<stop offset="25%" stop-color="#eee" />
 												<stop offset="100%" stop-color="#eee" />
 											</linearGradient>
 											<linearGradient id="in-out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
 												<stop stop-color="#19f" />
-												<stop offset="50%" stop-color="#eee" />
+												<stop offset="33%" stop-color="#eee" />
+												<stop offset="66%" stop-color="#eee" />
 												<stop offset="100%" stop-color="#19f" />
 											</linearGradient>
 										</defs>
