@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import Logo from "public/logo.svg";
+import Logo from "public/images/logo.svg";
 
 const Links = [
 	{
