@@ -349,15 +349,6 @@ export default function Component() {
 							/>
 						</g>
 					</svg>
-					<div className="absolute p-3 text-xs text-neutral-900">
-						TESTING
-						<p>
-							<b>A</b> x: {positionA.x}, y: {positionA.y}
-						</p>
-						<p>
-							<b>B</b> x: {positionB.x}, y: {positionB.y}
-						</p>
-					</div>
 					<Draggable
 						bounds="parent"
 						grid={[4, 4]}
