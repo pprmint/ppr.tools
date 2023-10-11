@@ -7,7 +7,7 @@ const description = "Define two colors and match one to the other using CSS filt
 export const metadata: Metadata = {
 	metadataBase: new URL("https://tools.ppr.one"),
 	openGraph: {
-		title: title,
+		title: `${title}.`,
 		description: description,
         images: [
 			{

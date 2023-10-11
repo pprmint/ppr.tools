@@ -7,7 +7,7 @@ const description = "Drag dots around to create a bézier curve and try out some
 export const metadata: Metadata = {
 	metadataBase: new URL("https://tools.ppr.one"),
 	openGraph: {
-		title: title,
+		title: `${title}.`,
 		description: description,
         images: [
 			{

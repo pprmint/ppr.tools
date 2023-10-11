@@ -6,7 +6,7 @@ const description = "Lorem ipsum dolor sit amet."
 export const metadata: Metadata = {
 	metadataBase: new URL("https://tools.ppr.one"),
 	openGraph: {
-		title: title,
+		title: `${title}.`,
 		description: description,
         images: [
 			{

@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 	themeColor: "#1199ff",
 	openGraph: {
 		title: "pprmint.tools",
-		description: "Small tools that may or may not help me with development.",
+		description: "Small tools for niche use cases.",
+		siteName: "tools.ppr.one",
+	},
+	twitter: {
+		site: "tools.ppr.one",
 	},
 };
 

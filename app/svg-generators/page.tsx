@@ -7,7 +7,7 @@ const description = "Generate abstract SVG shapes for all your vector needs."
 export const metadata: Metadata = {
 	metadataBase: new URL("https://tools.ppr.one"),
 	openGraph: {
-		title: title,
+		title: `${title}.`,
 		description: description,
         images: [
 			{
