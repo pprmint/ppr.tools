@@ -9,16 +9,15 @@ import "remixicon/fonts/remixicon.css";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://tools.ppr.one"),
-	title: "Some tools.",
-	description: "A small site with random small tools.",
+	title: "pprmint.tools.",
+    description: "Small tools for niche use cases.",
 	themeColor: "#1199ff",
 	openGraph: {
-		title: "pprmint.tools",
-		description: "Small tools for niche use cases.",
 		siteName: "tools.ppr.one",
 	},
 	twitter: {
 		site: "tools.ppr.one",
+        creator: "@npprmint",
 	},
 };
 
