@@ -3,7 +3,7 @@ import { ImageResponse, NextRequest } from "next/server";
 export const runtime = "edge";
 
 const fontDisplay = fetch(
-	new URL("../../../fonts/SilkaMono/silkamono-semibold-webfont.ttf", import.meta.url)
+	new URL("../../../fonts/SilkaMono/silkamono-medium-webfont.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export async function GET(req: NextRequest) {
@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
 				{
 					name: "Silka Mono",
 					data: fontDataDisplay,
-					weight: 600,
+					weight: 500,
 				},
 			],
 		}
