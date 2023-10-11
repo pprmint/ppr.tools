@@ -18,16 +18,14 @@ export async function GET(req: NextRequest) {
 					display: "flex",
 					width: "100%",
 					height: "100%",
-					flexDirection: "column",
 					textAlign: "left",
-					alignItems: "flex-start",
-					justifyContent: "center",
+					alignItems: "center",
+					justifyContent: "flex-start",
 					padding: 128,
 				}}
 			>
-				<h1 style={{ fontFamily: "Silka Mono", fontSize: 84, color: "#eee", lineHeight: 1, width: "70%" }}>
+				<h1 style={{ fontFamily: "Silka Mono", fontSize: 80, color: "#eee", lineHeight: 1, width: "60%" }}>
 					{title}
-					<span style={{ color: "#1199ff" }}>.</span>
 				</h1>
 			</div>
 		),
