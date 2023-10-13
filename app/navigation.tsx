@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTransition, a, config, easings } from "@react-spring/web";
+import { useTransition, a, easings } from "@react-spring/web";
 
 import Logo from "public/images/logo.svg";
 
@@ -39,39 +39,66 @@ function DesktopNavigation() {
 		enter: {
 			maxWidth: 408,
 			config: {
-				easing: easings.easeOutCubic,
-                duration: 400,
+				easing: easings.easeOutQuart,
+				duration: 400,
 			},
 		},
 		leave: {
 			maxWidth: 0,
 			config: {
-				easing: easings.easeOutCubic,
-                duration: 400,
+				easing: easings.easeOutQuart,
+				duration: 400,
 			},
 		},
 	});
 
 	return (
-		<>
+		<nav className="hidden md:block">
 			<button
 				onClick={() => setNavOpen(!navOpen)}
-				className={`fixed ${navOpen ? "bg-neutral-800 hover:bg-neutral-700" : "bg-neutral-900 hover:bg-neutral-800"} text-neutral-50 text-xl w-9 h-9 rounded-full left-6 bottom-6 ${navOpen ? "translate-x-80 rotate-0" : "translate-x-0 rotate-180"} z-50 duration-400 ease-out-cubic`}
+				className={`fixed ${
+					navOpen ? "bg-neutral-800 hover:bg-neutral-700" : "bg-neutral-900 hover:bg-neutral-800"
+				} text-neutral-50 w-10 h-10 rounded-full left-7 bottom-7
+                ${ navOpen ? "translate-x-[300px]" : "translate-x-0" }
+                z-50 duration-400 ease-out-quart overflow-hidden`}
 			>
-				<i className="ri-arrow-left-line" />
+				<svg
+					width="40"
+					height="40"
+					xmlns="http://www.w3.org/2000/svg"
+					className="group absolute left-0 top-0"
+				>
+					<path
+						d={navOpen ? "M12.7,20.7 20.5,13" : "M11,13 29,13"}
+						fill="transparent"
+						stroke="#eee"
+						strokeWidth="2"
+						className="duration-300 ease-out-quart"
+					/>
+					<path
+						d={navOpen ? "M14,20 28,20" : "M11,20 29,20"}
+						fill="transparent"
+						stroke="#eee"
+						strokeWidth="2"
+						className="duration-300 ease-out-quart"
+					/>
+					<path
+						d={navOpen ? "M12.7,19.3 20.5,27" : "M11,27 29,27"}
+						fill="transparent"
+						stroke="#eee"
+						strokeWidth="2"
+						className="duration-300 ease-out-quart"
+					/>
+				</svg>
 			</button>
 			{navTransition((styles, item) =>
 				item ? (
-					<a.nav
+					<a.div
 						style={styles}
-						className="hidden md:block relative w-full rounded-r-3xl bg-neutral-900 overflow-hidden"
+						className="relative w-full h-full rounded-r-3xl bg-neutral-900 overflow-hidden"
 					>
 						<div className="flex flex-col gap-3 whitespace-nowrap w-[400px] h-full p-6 lg:p-9">
-							<Image
-								src={Logo}
-								alt="tools logo"
-								className="h-9 lg:h-12 w-auto mb-6"
-							/>
+							<Image src={Logo} alt="tools logo" className="h-9 lg:h-12 w-auto mb-6" />
 							{Links.map((link) => (
 								<Link
 									key={link.path}
@@ -119,10 +146,10 @@ function DesktopNavigation() {
 								</p>
 							</div>
 						</div>
-					</a.nav>
+					</a.div>
 				) : null
 			)}
-		</>
+		</nav>
 	);
 }
 
