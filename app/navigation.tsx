@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTransition, a, easings } from "@react-spring/web";
+import { useTransition, a, easings, useSpring } from "@react-spring/web";
 
 import Logo from "public/images/logo.svg";
 
@@ -36,61 +36,62 @@ function DesktopNavigation() {
 	const [navOpen, setNavOpen] = useState(true);
 	const navTransition = useTransition(navOpen, {
 		from: { maxWidth: 0 },
-		enter: {
-			maxWidth: 408,
-			config: {
-				easing: easings.easeOutQuart,
-				duration: 400,
-			},
+		enter: { maxWidth: 400 },
+		leave: { maxWidth: 0 },
+		config: {
+			easing: easings.easeOutExpo,
+			duration: 400,
 		},
-		leave: {
-			maxWidth: 0,
-			config: {
-				easing: easings.easeOutQuart,
-				duration: 400,
-			},
+	});
+
+	const buttonPosition = useSpring({
+		from: { x: navOpen ? 0 : 300 },
+		to: { x: navOpen ? 300 : 0 },
+		config: {
+			easing: easings.easeOutExpo,
+			duration: 400,
 		},
 	});
 
 	return (
 		<nav className="hidden md:block">
-			<button
+			<a.button
 				onClick={() => setNavOpen(!navOpen)}
-				className={`fixed ${
-					navOpen ? "bg-neutral-800 hover:bg-neutral-700" : "bg-neutral-900 hover:bg-neutral-800"
-				} text-neutral-50 w-10 h-10 rounded-full left-7 bottom-7
-                ${ navOpen ? "translate-x-[300px]" : "translate-x-0" }
-                z-50 duration-400 ease-out-quart overflow-hidden`}
+				className="group fixed text-neutral-50 w-10 h-10 rounded-full left-7 bottom-7
+                z-50 overflow-hidden"
+				style={{ ...buttonPosition }}
 			>
-				<svg
-					width="40"
-					height="40"
-					xmlns="http://www.w3.org/2000/svg"
-					className="group absolute left-0 top-0"
-				>
+				<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" className="absolute left-0 top-0">
+					<rect
+						x="0"
+						y="0"
+						width="40"
+						height="40"
+						className="fill-neutral-800 group-hover:fill-neutral-700 duration-100"
+					/>
 					<path
 						d={navOpen ? "M12.7,20.7 20.5,13" : "M11,13 29,13"}
 						fill="transparent"
 						stroke="#eee"
 						strokeWidth="2"
-						className="duration-300 ease-out-quart"
+						className="duration-400 ease-out-quint"
 					/>
 					<path
 						d={navOpen ? "M14,20 28,20" : "M11,20 29,20"}
 						fill="transparent"
 						stroke="#eee"
 						strokeWidth="2"
-						className="duration-300 ease-out-quart"
+						className="duration-400 ease-out-quint"
 					/>
 					<path
 						d={navOpen ? "M12.7,19.3 20.5,27" : "M11,27 29,27"}
 						fill="transparent"
 						stroke="#eee"
 						strokeWidth="2"
-						className="duration-300 ease-out-quart"
+						className="duration-400 ease-out-quint"
 					/>
 				</svg>
-			</button>
+			</a.button>
 			{navTransition((styles, item) =>
 				item ? (
 					<a.div
