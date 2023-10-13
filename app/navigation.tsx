@@ -1,7 +1,9 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTransition, a, config, easings } from "@react-spring/web";
 
 import Logo from "public/images/logo.svg";
 
@@ -28,57 +30,131 @@ const Links = [
 	},
 ];
 
-export default function Navigation() {
+function DesktopNavigation() {
+	const path = usePathname();
+
+	const [navOpen, setNavOpen] = useState(true);
+	const navTransition = useTransition(navOpen, {
+		from: { maxWidth: 0 },
+		enter: {
+			maxWidth: 408,
+			config: {
+				easing: easings.easeOutCubic,
+                duration: 400,
+			},
+		},
+		leave: {
+			maxWidth: 0,
+			config: {
+				easing: easings.easeOutCubic,
+                duration: 400,
+			},
+		},
+	});
+
+	return (
+		<>
+			<button
+				onClick={() => setNavOpen(!navOpen)}
+				className={`fixed ${navOpen ? "bg-neutral-800 hover:bg-neutral-700" : "bg-neutral-900 hover:bg-neutral-800"} text-neutral-50 text-xl w-9 h-9 rounded-full left-6 bottom-6 ${navOpen ? "translate-x-80 rotate-0" : "translate-x-0 rotate-180"} z-50 duration-400 ease-out-cubic`}
+			>
+				<i className="ri-arrow-left-line" />
+			</button>
+			{navTransition((styles, item) =>
+				item ? (
+					<a.nav
+						style={styles}
+						className="hidden md:block relative w-full rounded-r-3xl bg-neutral-900 overflow-hidden"
+					>
+						<div className="flex flex-col gap-3 whitespace-nowrap w-[400px] h-full p-6 lg:p-9">
+							<Image
+								src={Logo}
+								alt="tools logo"
+								className="h-9 lg:h-12 w-auto mb-6"
+							/>
+							{Links.map((link) => (
+								<Link
+									key={link.path}
+									href={link.path}
+									className={`group flex gap-3 rounded-[20px] ${
+										path === link.path
+											? "mx-0 my-0 px-4 py-2 text-neutral-950 bg-blue"
+											: "mx-2 hover:mx-0 my-1 hover:my-0 px-2 hover:px-4 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
+									} active:scale-[97%] duration-200 ease-out`}
+								>
+									<i className={link.icon} />
+									<span className={`hidden md:block ${path === link.path ? "font-medium" : ""}`}>
+										{link.name}
+									</span>
+								</Link>
+							))}
+							<div className="mt-auto">
+								<p>
+									Made by{" "}
+									<Link
+										href="https://pprmint.art"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="group hover:text-neutral-50 duration-200"
+									>
+										pprmint<span className="group-hover:text-[#0c6] duration-200">.</span>
+										<span className="opacity-0 group-hover:opacity-100 duration-200">art</span>
+									</Link>
+								</p>
+								<p className="text-xs">
+									[
+									<Link
+										href={
+											Links.some((link) => path === link.path) && path != "/"
+												? `https://github.com/pprmint/tools.ppr.one/tree/main/app${path}`
+												: "https://github.com/pprmint/tools.ppr.one"
+										}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="group hover:text-neutral-50 duration-200"
+									>
+										source
+									</Link>
+									]
+								</p>
+							</div>
+						</div>
+					</a.nav>
+				) : null
+			)}
+		</>
+	);
+}
+
+function MobileNavigation() {
 	const path = usePathname();
 	return (
-		<nav className="fixed z-50 md:relative md:rounded-r-3xl bg-neutral-900 flex flex-col w-full md:max-w-sm px-6 py-3 md:py-6 lg:p-9 md:gap-3 overflow-x-auto">
-			<div className="flex md:flex-col whitespace-nowrap md:whitespace-normal gap-3 md:flex-grow">
-				<Image src={Logo} alt="tools logo" className="h-6 md:h-9 lg:h-12 w-auto mt-1.5 md:mt-0 md:mb-6" />
+		<nav className="flex md:hidden fixed z-50 bg-neutral-900 flex-col w-full px-6 py-3 overflow-x-auto">
+			<div className="flex whitespace-nowrap gap-3">
+				<Image src={Logo} alt="tools logo" className="h-6 w-auto mt-1.5 mr-3" />
 				{Links.map((link) => (
 					<Link
 						key={link.path}
 						href={link.path}
 						className={`group flex gap-3 rounded-[20px] ${
 							path === link.path
-								? "mx-0 my-0 px-3 md:px-4 py-2 text-neutral-950 bg-blue"
-								: "mx-1 md:mx-2 hover:mx-0 my-1 hover:my-0 px-2 hover:px-3 md:hover:px-4 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
+								? "mx-0 my-0 px-3 py-2 text-neutral-950 bg-blue"
+								: "mx-1 hover:mx-0 my-1 hover:my-0 px-2 hover:px-3 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
 						} active:scale-[97%] duration-200 ease-out`}
 					>
 						<i className={link.icon} />
-						<span className={`hidden md:block ${path === link.path ? "font-medium" : ""}`}>{link.name}</span>
 					</Link>
 				))}
 			</div>
-			<div className="hidden md:block">
-				<p>
-					Made by{" "}
-					<Link
-						href="https://pprmint.art"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="group hover:text-neutral-50 duration-200"
-					>
-						pprmint<span className="group-hover:text-[#0c6] duration-200">.</span>
-						<span className="opacity-0 group-hover:opacity-100 duration-200">art</span>
-					</Link>
-				</p>
-				<p className="text-xs">
-					[
-					<Link
-						href={
-							Links.some((link) => path === link.path) && path != "/"
-								? `https://github.com/pprmint/tools.ppr.one/tree/main/app${path}`
-								: "https://github.com/pprmint/tools.ppr.one"
-						}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="group hover:text-neutral-50 duration-200"
-					>
-						source
-					</Link>
-					]
-				</p>
-			</div>
 		</nav>
+	);
+}
+
+export default function Navigation() {
+	return (
+		<>
+			<DesktopNavigation />
+			<MobileNavigation />
+		</>
 	);
 }
