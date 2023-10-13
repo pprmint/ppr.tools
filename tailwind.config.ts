@@ -70,7 +70,7 @@ const config: Config = {
 				pageIn: {
 					from: {
 						opacity: "0%",
-						form: "translateY(50px)",
+						transform: "translateY(50px)",
 					},
 					to: {
 						opacity: "100%",
