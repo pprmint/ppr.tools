@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-const title = "SVG generator";
+const title = "SVG generators";
 const description = "Generate abstract SVG shapes for all your vector needs.";
 
 export const metadata: Metadata = {

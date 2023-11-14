@@ -329,7 +329,7 @@ export default function Component() {
 							/>
 							<path
 								d={`M0,600 ${positionA.x + 0.5},${positionA.y + 0.5}`}
-								stroke="#1181d6"
+								stroke="#397ec6"
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
@@ -339,7 +339,7 @@ export default function Component() {
 							/>
 							<path
 								d={`M400,200 ${positionB.x + 0.5},${positionB.y + 0.5}`}
-								stroke="#115180"
+								stroke="#234977"
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
@@ -483,7 +483,7 @@ export default function Component() {
 										}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - 200) / 400})`,
 									}}
 								>
-									<circle cx="50" cy="5" r="5" fill="#19f" />
+									<circle cx="50" cy="5" r="5" fill="#49e" />
 								</svg>
 								<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900 group-hover:bg-neutral-800 duration-200">
 									<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
@@ -505,18 +505,18 @@ export default function Component() {
 											<linearGradient id="in" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
 												<stop stop-color="#eee" />
 												<stop offset="75%" stop-color="#eee" />
-												<stop offset="100%" stop-color="#19f" />
+												<stop offset="100%" stop-color="#49e" />
 											</linearGradient>
 											<linearGradient id="out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stop-color="#19f" />
+												<stop stop-color="#49e" />
 												<stop offset="25%" stop-color="#eee" />
 												<stop offset="100%" stop-color="#eee" />
 											</linearGradient>
 											<linearGradient id="in-out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stop-color="#19f" />
+												<stop stop-color="#49e" />
 												<stop offset="33%" stop-color="#eee" />
 												<stop offset="66%" stop-color="#eee" />
-												<stop offset="100%" stop-color="#19f" />
+												<stop offset="100%" stop-color="#49e" />
 											</linearGradient>
 										</defs>
 									</svg>
