@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	metadataBase: new URL("https://tools.ppr.one"),
 	title: "pprmint.tools.",
     description: "Small tools for niche use cases.",
-	themeColor: "#1199ff",
+    themeColor: "#4499ee",
 	openGraph: {
 		siteName: "tools.ppr.one",
 	},
