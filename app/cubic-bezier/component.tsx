@@ -7,139 +7,151 @@ import * as Switch from "@radix-ui/react-switch";
 
 import "./animate.css";
 
-const Presets = [
-	{
-		type: "in",
-		group: "sine",
-		positionA: { x: 48, y: 600 },
-		positionB: { x: 156, y: 600 },
-	},
-	{
-		type: "out",
-		group: "sine",
-		positionA: { x: 244, y: 200 },
-		positionB: { x: 352, y: 200 },
-	},
-	{
-		type: "in-out",
-		group: "sine",
-		positionA: { x: 148, y: 600 },
-		positionB: { x: 248, y: 200 },
-	},
-	{
-		type: "in",
-		group: "quad",
-		positionA: { x: 44, y: 600 },
-		positionB: { x: 200, y: 600 },
-	},
-	{
-		type: "out",
-		group: "quad",
-		positionA: { x: 200, y: 200 },
-		positionB: { x: 356, y: 200 },
-	},
-	{
-		type: "in-out",
-		group: "quad",
-		positionA: { x: 180, y: 600 },
-		positionB: { x: 220, y: 200 },
-	},
-	{
-		type: "in",
-		group: "cubic",
-		positionA: { x: 128, y: 600 },
-		positionB: { x: 268, y: 200 },
-	},
-	{
-		type: "out",
-		group: "cubic",
-		positionA: { x: 132, y: 200 },
-		positionB: { x: 272, y: 200 },
-	},
-	{
-		type: "in-out",
-		group: "cubic",
-		positionA: { x: 260, y: 600 },
-		positionB: { x: 140, y: 200 },
-	},
-	{
-		type: "in",
-		group: "quart",
-		positionA: { x: 200, y: 600 },
-		positionB: { x: 300, y: 600 },
-	},
-	{
-		type: "out",
-		group: "quart",
-		positionA: { x: 100, y: 200 },
-		positionB: { x: 200, y: 200 },
-	},
-	{
-		type: "in-out",
-		group: "quart",
-		positionA: { x: 304, y: 600 },
-		positionB: { x: 96, y: 200 },
-	},
-	{
-		type: "in",
-		group: "quint",
-		positionA: { x: 256, y: 600 },
-		positionB: { x: 312, y: 600 },
-	},
-	{
-		type: "out",
-		group: "quint",
-		positionA: { x: 88, y: 200 },
-		positionB: { x: 144, y: 200 },
-	},
-	{
-		type: "in-out",
-		group: "quint",
-		positionA: { x: 332, y: 600 },
-		positionB: { x: 68, y: 200 },
-	},
-	{
-		type: "in",
-		group: "expo",
-		positionA: { x: 280, y: 600 },
-		positionB: { x: 312, y: 600 },
-	},
-	{
-		type: "out",
-		group: "expo",
-		positionA: { x: 64, y: 200 },
-		positionB: { x: 144, y: 200 },
-	},
-	{
-		type: "in-out",
-		group: "expo",
-		positionA: { x: 348, y: 600 },
-		positionB: { x: 52, y: 200 },
-	},
-];
-
 export default function Component() {
 	// Grid offset from the top in pixels
 	const [offset, setOffset] = useState(200);
 	function toggleOffset() {
 		if (offset === 200) {
 			setTransitionDisabled(false);
-			setOffset(400);
 			setPositionA({ x: positionA.x, y: positionA.y + 200 });
 			setPositionB({ x: positionB.x, y: positionB.y + 200 });
+            setOffset(400);
 			setTimeout(() => {
 				setTransitionDisabled(true);
 			}, 300);
 		} else {
 			setTransitionDisabled(false);
-			setOffset(200);
-			setPositionA({ x: positionA.x, y: positionA.y - 200 });
-			setPositionB({ x: positionB.x, y: positionB.y - 200 });
+			if (positionA.y < 400) {
+                setPositionA({ x: positionA.x, y: 0 });
+            } else if (positionA.y > 1000) {
+                setPositionA({ x: positionA.x, y: 800 });
+            } else {
+                setPositionA({ x: positionA.x, y: positionA.y - 200 });
+            }
+			if (positionB.y < 400) {
+                setPositionB({ x: positionB.x, y: 0 });
+            } else if (positionB.y > 1000) {
+                setPositionB({ x: positionB.x, y: 800 });
+            } else {
+                setPositionB({ x: positionB.x, y: positionB.y - 200 });
+            }
+            setOffset(200);
 			setTimeout(() => {
 				setTransitionDisabled(true);
 			}, 300);
 		}
 	}
+
+    const Presets = [
+        {
+            type: "in",
+            group: "sine",
+            positionA: { x: 48, y: offset + 400 },
+            positionB: { x: 156, y: offset + 400 },
+        },
+        {
+            type: "out",
+            group: "sine",
+            positionA: { x: 244, y: offset },
+            positionB: { x: 352, y: offset },
+        },
+        {
+            type: "in-out",
+            group: "sine",
+            positionA: { x: 148, y: offset + 400 },
+            positionB: { x: 248, y: offset },
+        },
+        {
+            type: "in",
+            group: "quad",
+            positionA: { x: 44, y: offset + 400 },
+            positionB: { x: 200, y: offset + 400 },
+        },
+        {
+            type: "out",
+            group: "quad",
+            positionA: { x: 200, y: offset },
+            positionB: { x: 356, y: offset },
+        },
+        {
+            type: "in-out",
+            group: "quad",
+            positionA: { x: 180, y: offset + 400 },
+            positionB: { x: 220, y: offset },
+        },
+        {
+            type: "in",
+            group: "cubic",
+            positionA: { x: 128, y: offset + 400 },
+            positionB: { x: 268, y: offset },
+        },
+        {
+            type: "out",
+            group: "cubic",
+            positionA: { x: 132, y: offset },
+            positionB: { x: 272, y: offset },
+        },
+        {
+            type: "in-out",
+            group: "cubic",
+            positionA: { x: 260, y: offset + 400 },
+            positionB: { x: 140, y: offset },
+        },
+        {
+            type: "in",
+            group: "quart",
+            positionA: { x: 200, y: offset + 400 },
+            positionB: { x: 300, y: offset + 400 },
+        },
+        {
+            type: "out",
+            group: "quart",
+            positionA: { x: 100, y: offset },
+            positionB: { x: 200, y: offset },
+        },
+        {
+            type: "in-out",
+            group: "quart",
+            positionA: { x: 304, y: offset + 400 },
+            positionB: { x: 96, y: offset },
+        },
+        {
+            type: "in",
+            group: "quint",
+            positionA: { x: 256, y: offset + 400 },
+            positionB: { x: 312, y: offset + 400 },
+        },
+        {
+            type: "out",
+            group: "quint",
+            positionA: { x: 88, y: offset },
+            positionB: { x: 144, y: offset },
+        },
+        {
+            type: "in-out",
+            group: "quint",
+            positionA: { x: 332, y: offset + 400 },
+            positionB: { x: 68, y: offset },
+        },
+        {
+            type: "in",
+            group: "expo",
+            positionA: { x: 280, y: offset + 400 },
+            positionB: { x: 312, y: offset + 400 },
+        },
+        {
+            type: "out",
+            group: "expo",
+            positionA: { x: 64, y: offset },
+            positionB: { x: 144, y: offset },
+        },
+        {
+            type: "in-out",
+            group: "expo",
+            positionA: { x: 348, y: offset + 400 },
+            positionB: { x: 52, y: offset },
+        },
+    ];
 
 	// Position of draggable handles.
 	const [positionA, setPositionA] = useState({ x: 200, y: 560 });
@@ -175,216 +187,60 @@ export default function Component() {
 
 	return (
 		<div className="flex flex-col 2xl:flex-row gap-9">
-			<div className="flex w-max">
-				<div className={`relative flex-row w-[424px] ${offset === 400 ? "h-[1224px]" : "h-[824px]"}`}>
-					<svg
-						width={400}
-						height={600 + offset * 2}
-						xmlns="http://www.w3.org/2000/svg"
-						className="group absolute left-0 duration-200 ease-in-cubic"
-					>
+			<div className="flex 2xl:w-max">
+				<div className={`relative flex-row w-[424px] ${offset === 400 ? "h-[1224px]" : "h-[824px]"} mx-auto duration-300 ease-in-out-cubic`}>
+					<svg width={400} height={400 + offset * 2} xmlns="http://www.w3.org/2000/svg" className="group absolute left-0 duration-200 ease-in-cubic">
 						<g id="backdrop">
-							<rect
-								x={1}
-								y={offset + 1}
-								width={398}
-								height={398}
-								fill="transparent"
-								strokeWidth={2}
-								stroke="#222"
-								className="duration-300 ease-in-out-cubic"
-							/>
-							<rect
-								x={0.5}
-								y={0.5}
-								width={399}
-								height={offset * 2 + 399}
-								fill="transparent"
-								strokeWidth={1}
-								stroke="#222"
-								className="duration-300 ease-in-out-cubic"
-							/>
+							<rect x={1} y={offset + 1} width={398} height={398} fill="transparent" strokeWidth={2} stroke="#222" className="duration-300 ease-in-out-cubic" />
+							<rect x={0.5} y={0.5} width={399} height={offset * 2 + 399} fill="transparent" strokeWidth={1} stroke="#222" className="duration-300 ease-in-out-cubic" />
 							<g id="vertical">
-								<path
-									d="M40.5,200 40.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M80.5,200 80.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M120.5,200 120.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M160.5,200 160.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M200.5,200 200.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M240.5,200 240.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M280.5,200 280.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M320.5,200 320.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M360.5,200 360.5,600"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
+								<path d="M40.5,0 40.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M80.5,0 80.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M120.5,0 120.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M160.5,0 160.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M200.5,0 200.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M240.5,0 240.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M280.5,0 280.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M320.5,0 320.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M360.5,0 360.5,1200" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
 							</g>
 							<g id="horizontal">
-								<path
-									d="M0,240.5 400,240.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,280.5 400,280.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,320.5 400,320.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,360.5 400,360.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,400.5 400,400.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,440.5 400,440.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,480.5 400,480.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,520.5 400,520.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
-								<path
-									d="M0,560.5 400,560.5"
-									fill="transparent"
-									stroke="#222"
-									strokeWidth={1}
-									strokeDasharray={4}
-									strokeDashoffset={1.5}
-								/>
+								<path d="M0,40.5 400,40.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,80.5 400,80.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,120.5 400,120.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,160.5 400,160.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,200.5 400,200.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,240.5 400,240.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,280.5 400,280.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,320.5 400,320.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,360.5 400,360.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,400.5 400,400.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,440.5 400,440.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,480.5 400,480.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,520.5 400,520.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,560.5 400,560.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,600.5 400,600.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,640.5 400,640.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,680.5 400,680.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,720.5 400,720.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,760.5 400,760.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,800.5 400,800.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,840.5 400,840.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,880.5 400,880.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,920.5 400,920.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,960.5 400,960.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,1000.5 400,1000.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,1040.5 400,1040.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,1080.5 400,1080.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,1120.5 400,1120.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
+								<path d="M0,1160.5 400,1160.5" fill="transparent" stroke="#222" strokeWidth={1} strokeDasharray={4} strokeDashoffset={1.5} />
 							</g>
-							<path
-								d={`M1,${offset} V${offset + 399} H400`}
-								fill="transparent"
-								stroke="#444"
-								strokeWidth={2}
-								className="duration-300 ease-in-out-cubic"
-							/>
+							<path d={`M1,${offset} V${offset + 399} H400`} fill="transparent" stroke="#444" strokeWidth={2} className="duration-300 ease-in-out-cubic" />
 						</g>
 						<g id="draw">
-							<path
-								d={`M0,${offset + 400} C${positionA.x},${positionA.y} ${positionB.x},${positionB.y} 400,${offset}`}
-								stroke="#eee"
-								strokeWidth={2}
-								strokeLinecap="round"
-								fill="transparent"
-								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
-							/>
-							<path
-								d={`M0,${offset + 400} ${positionA.x + 0.5},${positionA.y + 0.5}`}
-								stroke="#397ec6"
-								strokeWidth={4}
-								strokeLinecap="round"
-								fill="transparent"
-								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
-							/>
-							<path
-								d={`M400,${offset} ${positionB.x + 0.5},${positionB.y + 0.5}`}
-								stroke="#234977"
-								strokeWidth={4}
-								strokeLinecap="round"
-								fill="transparent"
-								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
-							/>
+							<path d={`M0,${offset + 400} C${positionA.x},${positionA.y} ${positionB.x},${positionB.y} 400,${offset}`} stroke="#eee" strokeWidth={2} strokeLinecap="round" fill="transparent" className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`} />
+							<path d={`M0,${offset + 400} ${positionA.x + 0.5},${positionA.y + 0.5}`} stroke="#397ec6" strokeWidth={4} strokeLinecap="round" fill="transparent" className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`} />
+							<path d={`M400,${offset} ${positionB.x + 0.5},${positionB.y + 0.5}`} stroke="#234977" strokeWidth={4} strokeLinecap="round" fill="transparent" className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`} />
 						</g>
 					</svg>
 					<Draggable
@@ -432,7 +288,7 @@ export default function Component() {
 				</div>
 				<div className="flex items-center gap-6">
 					<Switch.Root
-						className="group relative w-14 h-8 rounded-full bg-neutral-900 hover:bg-neutral-800 data-[state='checked']:bg-blue data-[state='checked']:hover:bg-blue-400 duration-300 ease-out"
+						className="group relative w-14 h-8 rounded-full data-[state='unchecked']:bg-neutral-900 data-[state='unchecked']:hover:bg-neutral-800 data-[state='unchecked']:active:bg-neutral-900 data-[state='checked']:bg-blue data-[state='checked']:hover:bg-blue-400 data-[state='checked']:active:bg-blue-600 duration-300 active:duration-100 ease-out"
 						id="toggle-size"
 						onClick={toggleOffset}
 						checked={offset === 400}
@@ -455,7 +311,7 @@ export default function Component() {
 				<div id="duration-controls">
 					<div className="flex justify-between text-xs">
 						<label htmlFor="duration">Transition duration</label>
-						<p>{duration}s</p>
+						<p>{duration[0] === 0 ? "Might as well not bother." : `${duration}s`}</p>
 					</div>
 					<Slider.Root
 						name="duration"
@@ -531,8 +387,8 @@ export default function Component() {
 										animationDuration: `${duration}s`,
 										// jesus christ
 										animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${
-											1 - (easing.positionA.y - 200) / 400
-										}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - 200) / 400})`,
+											1 - (easing.positionA.y - offset) / 400
+										}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - offset) / 400})`,
 									}}
 								>
 									<circle cx="50" cy="5" r="5" fill="#49e" />
@@ -541,7 +397,7 @@ export default function Component() {
 									<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
 										<path d="M4,200 V600 H400" fill="transparent" stroke="#555" strokeWidth={8} strokeDasharray={17} />
 										<path
-											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 394,196`}
+											d={`M4,600 C${easing.positionA.x},${easing.positionA.y - (offset === 400 ? 200 : 0)} ${easing.positionB.x},${easing.positionB.y - (offset === 400 ? 200 : 0)} 394,196`}
 											stroke={`url(#${easing.type})`}
 											strokeWidth={8}
 											strokeLinecap="round"
