@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import Draggable from "react-draggable";
-import * as Slider from "@radix-ui/react-slider";
 import * as Collapsible from "@radix-ui/react-collapsible";
+import * as Slider from "@radix-ui/react-slider";
+import * as Switch from "@radix-ui/react-switch";
 
 import "./animate.css";
 
@@ -118,14 +119,36 @@ const Presets = [
 ];
 
 export default function Component() {
+	// Grid offset from the top in pixels
+	const [offset, setOffset] = useState(200);
+	function toggleOffset() {
+		if (offset === 200) {
+			setTransitionDisabled(false);
+			setOffset(400);
+			setPositionA({ x: positionA.x, y: positionA.y + 200 });
+			setPositionB({ x: positionB.x, y: positionB.y + 200 });
+			setTimeout(() => {
+				setTransitionDisabled(true);
+			}, 300);
+		} else {
+			setTransitionDisabled(false);
+			setOffset(200);
+			setPositionA({ x: positionA.x, y: positionA.y - 200 });
+			setPositionB({ x: positionB.x, y: positionB.y - 200 });
+			setTimeout(() => {
+				setTransitionDisabled(true);
+			}, 300);
+		}
+	}
+
 	// Position of draggable handles.
 	const [positionA, setPositionA] = useState({ x: 200, y: 560 });
 	const [positionB, setPositionB] = useState({ x: 200, y: 240 });
 
 	// Get cubic-bezier from positions of handles; rounded to two decimals after comma.
-	const cubicBezier = `${positionA.x / 400}, ${parseFloat((1 - (positionA.y - 200) / 400).toFixed(2))}, ${
+	const cubicBezier = `${positionA.x / 400}, ${parseFloat((1 - (positionA.y - offset) / 400).toFixed(2))}, ${
 		positionB.x / 400
-	}, ${parseFloat((1 - (positionB.y - 200) / 400).toFixed(2))}`;
+	}, ${parseFloat((1 - (positionB.y - offset) / 400).toFixed(2))}`;
 
 	// Duration of animation previews (boxes on hover, spinny circle for easing presets).
 	const [duration, setDuration] = useState([1]);
@@ -153,18 +176,33 @@ export default function Component() {
 	return (
 		<div className="flex flex-col 2xl:flex-row gap-9">
 			<div className="flex w-max">
-				<div className="relative flex-row w-[424px] h-[824px]">
-					<svg width={400} height={800} xmlns="http://www.w3.org/2000/svg" className="group absolute left-0">
+				<div className={`relative flex-row w-[424px] ${offset === 400 ? "h-[1224px]" : "h-[824px]"}`}>
+					<svg
+						width={400}
+						height={600 + offset * 2}
+						xmlns="http://www.w3.org/2000/svg"
+						className="group absolute left-0 duration-200 ease-in-cubic"
+					>
 						<g id="backdrop">
-							<rect x={1} y={201} width={398} height={398} fill="transparent" strokeWidth={2} stroke="#222" />
+							<rect
+								x={1}
+								y={offset + 1}
+								width={398}
+								height={398}
+								fill="transparent"
+								strokeWidth={2}
+								stroke="#222"
+								className="duration-300 ease-in-out-cubic"
+							/>
 							<rect
 								x={0.5}
 								y={0.5}
 								width={399}
-								height={799}
+								height={offset * 2 + 399}
 								fill="transparent"
 								strokeWidth={1}
 								stroke="#222"
+								className="duration-300 ease-in-out-cubic"
 							/>
 							<g id="vertical">
 								<path
@@ -314,38 +352,38 @@ export default function Component() {
 									strokeDashoffset={1.5}
 								/>
 							</g>
-							<path d="M1,200 V599 H400" fill="transparent" stroke="#333" strokeWidth={2} />
+							<path
+								d={`M1,${offset} V${offset + 399} H400`}
+								fill="transparent"
+								stroke="#444"
+								strokeWidth={2}
+								className="duration-300 ease-in-out-cubic"
+							/>
 						</g>
 						<g id="draw">
 							<path
-								d={`M0,600 C${positionA.x},${positionA.y} ${positionB.x},${positionB.y} 400,200`}
+								d={`M0,${offset + 400} C${positionA.x},${positionA.y} ${positionB.x},${positionB.y} 400,${offset}`}
 								stroke="#eee"
 								strokeWidth={2}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 							<path
-								d={`M0,600 ${positionA.x + 0.5},${positionA.y + 0.5}`}
+								d={`M0,${offset + 400} ${positionA.x + 0.5},${positionA.y + 0.5}`}
 								stroke="#397ec6"
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 							<path
-								d={`M400,200 ${positionB.x + 0.5},${positionB.y + 0.5}`}
+								d={`M400,${offset} ${positionB.x + 0.5},${positionB.y + 0.5}`}
 								stroke="#234977"
 								strokeWidth={4}
 								strokeLinecap="round"
 								fill="transparent"
-								className={`${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+								className={`${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 						</g>
 					</svg>
@@ -363,7 +401,7 @@ export default function Component() {
 						<div
 							className={`absolute w-[24px] h-[24px] rounded-full bg-blue cursor-grab active:cursor-grabbing ${
 								transitionDisabled ? "duration-0" : "duration-300"
-							} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+							} ease-in-out-cubic`}
 						/>
 					</Draggable>
 					<Draggable
@@ -380,16 +418,32 @@ export default function Component() {
 						<div
 							className={`absolute w-[24px] h-[24px] rounded-full bg-blue-700 cursor-grab active:cursor-grabbing ${
 								transitionDisabled ? "duration-0" : "duration-300"
-							} ease-[cubic-bezier(0.65,0,0.35,1)]`}
+							} ease-in-out-cubic`}
 						/>
 					</Draggable>
 				</div>
 			</div>
 			<div className="w-full flex flex-col gap-6">
-				<div
-					id="cubic-bezier-code"
-					className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full"
-				>
+				<div className="flex flex-col gap-3">
+					<h1 className="text-neutral-50 font-display font-medium text-3xl md:text-5xl">
+						Cubic bézier<span className="text-blue">.</span>
+					</h1>
+					<p>Drag the dots around to create a bézier curve, and test your easing by hovering over the boxes below.</p>
+				</div>
+				<div className="flex items-center gap-6">
+					<Switch.Root
+						className="group relative w-14 h-8 rounded-full bg-neutral-900 hover:bg-neutral-800 data-[state='checked']:bg-blue data-[state='checked']:hover:bg-blue-400 duration-300 ease-out"
+						id="toggle-size"
+						onClick={toggleOffset}
+						checked={offset === 400}
+					>
+						<Switch.Thumb className="flex items-center justify-center h-3 w-3 rounded-full group-data-[state='checked']:w-0 ring-2 group-data-[state='checked']:ring-1 ring-neutral-50 group-data-[state='checked']:ring-neutral-900 translate-x-3 data-[state='checked']:translate-x-10 duration-300 ease-out" />
+					</Switch.Root>
+					<label htmlFor="toggle-size">
+						Increase canvas size
+					</label>
+				</div>
+				<div id="cubic-bezier-code" className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full">
 					<p className="flex-grow">
 						cubic-bezier(<span className="text-neutral-50">{cubicBezier}</span>);
 					</p>
@@ -453,9 +507,7 @@ export default function Component() {
 							<button onClick={() => setPresetsVisible(!presetsVisible)} className="flex gap-3">
 								<h2 className="font-display text-neutral-50">Presets</h2>
 								<i
-									className={`ri-arrow-down-s-line ${
-										presetsVisible ? "rotate-180" : "rotate-0"
-									} duration-200 ease-out`}
+									className={`ri-arrow-down-s-line ${presetsVisible ? "rotate-180" : "rotate-0"} duration-200 ease-out`}
 								/>
 							</button>
 						</Collapsible.Trigger>
@@ -487,13 +539,7 @@ export default function Component() {
 								</svg>
 								<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900 group-hover:bg-neutral-800 duration-200">
 									<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
-										<path
-											d="M4,200 V600 H400"
-											fill="transparent"
-											stroke="#555"
-											strokeWidth={8}
-											strokeDasharray={17}
-										/>
+										<path d="M4,200 V600 H400" fill="transparent" stroke="#555" strokeWidth={8} strokeDasharray={17} />
 										<path
 											d={`M4,600 C${easing.positionA.x},${easing.positionA.y} ${easing.positionB.x},${easing.positionB.y} 394,196`}
 											stroke={`url(#${easing.type})`}

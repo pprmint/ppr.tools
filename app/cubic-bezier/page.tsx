@@ -27,14 +27,6 @@ export const metadata: Metadata = {
 export default function CubicBezier() {
 	return (
 		<main className="animate-page-in">
-			<section className="flex flex-col gap-3 mb-12">
-				<h1 className="text-neutral-50 font-display font-medium text-3xl md:text-5xl">
-					{title}<span className="text-blue">.</span>
-				</h1>
-				<p>
-					Drag the dots around to create a bézier curve, and test your easing by hovering over the boxes below.
-				</p>
-			</section>
 			<section>
 				<Component />
 			</section>
