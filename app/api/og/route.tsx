@@ -1,10 +1,11 @@
-import { ImageResponse, NextRequest } from "next/server";
+import { NextRequest } from "next/server";
+import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-const fontDisplay = fetch(
-	new URL("../../../fonts/SilkaMono/silkamono-medium-webfont.ttf", import.meta.url)
-).then((res) => res.arrayBuffer());
+const fontDisplay = fetch(new URL("../../../fonts/SilkaMono/silkamono-medium-webfont.ttf", import.meta.url)).then(
+	(res) => res.arrayBuffer()
+);
 
 export async function GET(req: NextRequest) {
 	const { searchParams } = req.nextUrl;
@@ -24,9 +25,7 @@ export async function GET(req: NextRequest) {
 					padding: 128,
 				}}
 			>
-				<h1 style={{ fontFamily: "Silka Mono", fontSize: 80, color: "#eee", lineHeight: 1, width: "60%" }}>
-					{title}
-				</h1>
+				<h1 style={{ fontFamily: "Silka Mono", fontSize: 80, color: "#eee", lineHeight: 1, width: "60%" }}>{title}</h1>
 			</div>
 		),
 		{
