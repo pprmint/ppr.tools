@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 		(
 			<div
 				style={{
-					backgroundImage: "url(https://tools.ppr.one/images/OG_bg.png)",
+					backgroundImage: "url(https://ppr.tools/images/OG_bg.png)",
 					display: "flex",
 					width: "100%",
 					height: "100%",

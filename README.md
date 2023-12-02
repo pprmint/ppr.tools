@@ -1,10 +1,10 @@
 <p align="center">
-  <a href="https://tools.ppr.one" target="_blank">
+  <a href="https://ppr.tools" target="_blank">
     <img height="120" src="/public/images/icon.svg">
   </a>
 </p>
 
-# tools.ppr.one
+# ppr.tools
 
 A small site with small tools for niche use cases.
 

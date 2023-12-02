@@ -5,20 +5,20 @@ const title = "CSS filter to color";
 const description = "Define two colors and match one to the other using CSS filters."
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://tools.ppr.one"),
+	metadataBase: new URL("https://ppr.tools"),
     title: `${title}.`,
     description: description,
 	openGraph: {
         images: [
 			{
-				url: `https://tools.ppr.one/api/og?title=${title}`,
+				url: `https://ppr.tools/api/og?title=${title}`,
 			},
 		],
 	},
     twitter: {
         images: [
 			{
-				url: `https://tools.ppr.one/api/og?title=${title}`,
+				url: `https://ppr.tools/api/og?title=${title}`,
 			},
 		],
     }

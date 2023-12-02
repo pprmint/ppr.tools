@@ -5,20 +5,20 @@ const title = "SVG generators";
 const description = "Generate abstract SVG shapes for all your vector needs.";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://tools.ppr.one"),
+	metadataBase: new URL("https://ppr.tools"),
 	title: `${title}.`,
 	description: description,
 	openGraph: {
 		images: [
 			{
-				url: `https://tools.ppr.one/api/og?title=${title}`,
+				url: `https://ppr.tools/api/og?title=${title}`,
 			},
 		],
 	},
 	twitter: {
 		images: [
 			{
-				url: `https://tools.ppr.one/api/og?title=${title}`,
+				url: `https://ppr.tools/api/og?title=${title}`,
 			},
 		],
 	},
