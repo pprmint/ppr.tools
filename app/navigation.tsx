@@ -33,20 +33,11 @@ const Links = [
 function DesktopNavigation() {
 	const path = usePathname();
 
-	const [navOpen, setNavOpen] = useState(true);
+	const [navOpen, setNavOpen] = useState(false);
 	const navTransition = useTransition(navOpen, {
 		from: { maxWidth: 0 },
 		enter: { maxWidth: 400 },
 		leave: { maxWidth: 0 },
-		config: {
-			easing: easings.easeOutExpo,
-			duration: 400,
-		},
-	});
-
-	const buttonPosition = useSpring({
-		from: { x: navOpen ? 0 : 300 },
-		to: { x: navOpen ? 300 : 0 },
 		config: {
 			easing: easings.easeOutExpo,
 			duration: 400,
@@ -59,7 +50,6 @@ function DesktopNavigation() {
 				onClick={() => setNavOpen(!navOpen)}
 				className="group fixed text-neutral-50 w-10 h-10 rounded-full left-7 bottom-7
                 z-50 overflow-hidden"
-				style={{ ...buttonPosition }}
 			>
 				<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" className="absolute left-0 top-0">
 					<rect
@@ -94,11 +84,8 @@ function DesktopNavigation() {
 			</a.button>
 			{navTransition((styles, item) =>
 				item ? (
-					<a.div
-						style={styles}
-						className="relative w-full h-full rounded-r-3xl bg-neutral-900 overflow-hidden"
-					>
-						<div className="flex flex-col gap-3 whitespace-nowrap w-[400px] h-full p-6 lg:p-9">
+					<a.div style={styles} className="relative w-full h-full rounded-r-3xl bg-neutral-900 overflow-hidden">
+						<div className="flex flex-col gap-3 whitespace-nowrap w-[400px] h-full p-6 lg:p-8">
 							<Image src={Logo} alt="tools logo" className="h-9 lg:h-12 w-auto mb-6" />
 							{Links.map((link) => (
 								<Link
@@ -111,12 +98,10 @@ function DesktopNavigation() {
 									} active:scale-[97%] duration-200 ease-out`}
 								>
 									<i className={link.icon} />
-									<span className={`hidden md:block ${path === link.path ? "font-medium" : ""}`}>
-										{link.name}
-									</span>
+									<span className={`hidden md:block ${path === link.path ? "font-medium" : ""}`}>{link.name}</span>
 								</Link>
 							))}
-							<div className="mt-auto">
+							<div className="mt-auto ml-16">
 								<p>
 									Made by{" "}
 									<Link

@@ -9,6 +9,9 @@ export default function Home() {
 					This site is a collection of various tools that help me (and maybe you) with web development and
 					other things.
 				</p>
+				<p className="hidden md:block">
+					You can open the menu using the button in the bottom left corner.
+				</p>
 				<p>
 					There may be other sites out there which do the same things as some of the tools here, sure, but
 					this serves as a central place to access everything I need, while also having the ability to customize and change stuff as needed.
