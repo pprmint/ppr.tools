@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://ppr.tools" target="_blank">
-    <img height="120" src="/public/images/icon.svg">
+    <img height="150" src="/public/images/icon.svg">
   </a>
 </p>
 
