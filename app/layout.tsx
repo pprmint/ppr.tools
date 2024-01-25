@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
 import Navigation from "./navigation";
-import InfoRibbon from "./inforibbon";
 
 import "./globals.css";
 import "fonts/SilkaMono/silkamono.css";
@@ -30,7 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className="font-mono bg-neutral-950 text-neutral flex selection:bg-blue selection:text-neutral-950 md:overflow-hidden">
-				<InfoRibbon />
 				<Navigation />
 				<div className="flex w-full min-h-screen flex-col py-24 px-6 md:px-12 lg:px-24 gap-3 md:h-screen md:overflow-y-auto">
 					{children}
