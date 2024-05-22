@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HexComponent from "./hex/component";
+import HexComponent from "./components/hex";
 
 const title = "Color converter";
 const description = "Convert colors to and from HEX, RGB and HSL formats."
@@ -32,7 +32,7 @@ export default function FilterColor() {
 					{title}<span className="text-blue">.</span>
 				</h1>
 				<p>
-					Enter color codes and convert them to different formats. Supports alpha channels too.
+					Enter color codes and convert them to different formats. Click on parts of a converted code to copy it to your clipboard. More to be added soon-ish.
 				</p>
 			</section>
 			<section>
