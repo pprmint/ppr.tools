@@ -12,11 +12,11 @@ const nextConfig = {
 				destination: "/filter-color",
 				permanent: true,
 			},
-            {
-                source: "/cubic",
-                destination: "/cubic-bezier",
-                permanent: true,
-            },
+			{
+				source: "/cubic",
+				destination: "/cubic-bezier",
+				permanent: true,
+			},
 			{
 				source: "/easing",
 				destination: "/cubic-bezier",

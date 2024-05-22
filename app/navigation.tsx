@@ -19,6 +19,11 @@ const Links = [
 		icon: "ri-file-list-2-line",
 	},
 	{
+		name: "Color converter",
+		path: "/color-converter",
+		icon: "ri-arrow-left-right-line",
+	},
+	{
 		name: "CSS filter to color",
 		path: "/filter-color",
 		icon: "ri-contrast-line",
@@ -48,8 +53,7 @@ function DesktopNavigation() {
 		<nav className="hidden md:block">
 			<a.button
 				onClick={() => setNavOpen(!navOpen)}
-				className="group fixed text-neutral-50 w-10 h-10 rounded-full left-7 bottom-7
-                z-50 overflow-hidden"
+				className="group fixed text-neutral-50 w-10 h-10 rounded-full left-7 bottom-7 z-50 overflow-hidden"
 			>
 				<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" className="absolute left-0 top-0">
 					<rect
