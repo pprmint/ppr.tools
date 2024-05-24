@@ -58,7 +58,8 @@ export default function HexComponent() {
 							id="source"
 							placeholder="123456ff"
 							maxLength={8}
-							className="bg-transparent placeholder:text-neutral-600 w-full focus:outline-none"
+              size={7}
+							className="bg-transparent placeholder:text-neutral-600 focus:outline-none border-0 border-b-2 border-neutral-900 focus:border-blue"
 							onChange={(e) => {
 								const value = e.target.value;
 								const hexRegex = /^[0-9A-Fa-f]*$/;
