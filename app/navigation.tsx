@@ -109,13 +109,13 @@ function DesktopNavigation() {
 								<p>
 									Made by{" "}
 									<Link
-										href="https://pprmint.art"
+										href="https://pprmint.de"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="group hover:text-neutral-50 duration-200"
 									>
 										pprmint<span className="group-hover:text-[#0c6] duration-200">.</span>
-										<span className="opacity-0 group-hover:opacity-100 duration-200">art</span>
+										<span className="opacity-0 group-hover:opacity-100 duration-200">de</span>
 									</Link>
 								</p>
 								<p className="text-xs">
