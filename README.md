@@ -1,14 +1,8 @@
-<p align="center">
-  <a href="https://ppr.tools" target="_blank">
-    <img height="150" src="/public/images/icon.svg">
-  </a>
-</p>
-
-# ppr.tools
+# ppr.tools <a href="https://ppr.tools" target="_blank"><img align="right" height="40" src="/public/images/icon.svg"></a>
 
 A small site with small tools for niche use cases.
 
-## Getting Started
+## Getting started.
 
 ```bash
 pnpm i
