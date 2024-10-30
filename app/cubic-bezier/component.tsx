@@ -713,20 +713,20 @@ export default function Component() {
 										/>
 										<defs>
 											<linearGradient id="in" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stop-color="#eee" />
-												<stop offset="75%" stop-color="#eee" />
-												<stop offset="100%" stop-color="#49e" />
+												<stop stopColor="#eee" />
+												<stop offset="75%" stopColor="#eee" />
+												<stop offset="100%" stopColor="#49e" />
 											</linearGradient>
 											<linearGradient id="out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stop-color="#49e" />
-												<stop offset="25%" stop-color="#eee" />
-												<stop offset="100%" stop-color="#eee" />
+												<stop stopColor="#49e" />
+												<stop offset="25%" stopColor="#eee" />
+												<stop offset="100%" stopColor="#eee" />
 											</linearGradient>
 											<linearGradient id="in-out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stop-color="#49e" />
-												<stop offset="33%" stop-color="#eee" />
-												<stop offset="66%" stop-color="#eee" />
-												<stop offset="100%" stop-color="#49e" />
+												<stop stopColor="#49e" />
+												<stop offset="33%" stopColor="#eee" />
+												<stop offset="66%" stopColor="#eee" />
+												<stop offset="100%" stopColor="#49e" />
 											</linearGradient>
 										</defs>
 									</svg>
