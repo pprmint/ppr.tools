@@ -7,6 +7,7 @@ import * as Switch from "@radix-ui/react-switch";
 import BezierEasing from "bezier-easing";
 
 import "./animate.css";
+import Button from "components/Button";
 
 export default function Component() {
 	const dragAref = useRef(null);
@@ -207,6 +208,22 @@ export default function Component() {
 		event.preventDefault();
 	};
 
+	// Invert easing curve by swapping positions.
+	function invertCurves() {
+		setTransitionDisabled(false);
+		let aX = positionA.x;
+		let aY = positionA.y;
+
+		let bX = positionB.x;
+		let bY = positionB.y;
+
+		setPositionA({ x: 400 - bX, y: offset - bY + offset + 400 });
+		setPositionB({ x: 400 - aX, y: offset - aY + offset + 400 });
+		setTimeout(() => {
+			setTransitionDisabled(true);
+		}, 300);
+	}
+
 	return (
 		<div className="flex flex-col 2xl:flex-row gap-9">
 			<div className="flex 2xl:w-max">
@@ -222,9 +239,9 @@ export default function Component() {
 						<g id="backdrop">
 							<rect
 								x={1}
-								y={offset + 1}
+								y={offset}
 								width={398}
-								height={399}
+								height={400}
 								strokeWidth={2}
 								className="fill-transparent stroke-neutral-900 duration-300 ease-in-out-cubic"
 							/>
@@ -507,7 +524,7 @@ export default function Component() {
 								/>
 							</g>
 							<path
-								d={`M1,${offset} V${offset + 400} H400`}
+								d={`M1,${offset - 1} V${offset + 400} H400`}
 								className="fill-none stroke-neutral-800 duration-300 ease-in-out-cubic"
 								strokeWidth={2}
 							/>
@@ -520,13 +537,13 @@ export default function Component() {
 								className={`fill-transparent stroke-neutral-50 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 							<path
-								d={`M0,${offset + 400} ${positionA.x + 0.5},${positionA.y + 0.5}`}
+								d={`M0,${offset + 400} ${positionA.x},${positionA.y}`}
 								strokeWidth={4}
 								strokeLinecap="round"
 								className={`fill-transparent stroke-blue-600 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 							<path
-								d={`M400,${offset} ${positionB.x + 0.5},${positionB.y + 0.5}`}
+								d={`M400,${offset} ${positionB.x},${positionB.y}`}
 								strokeWidth={4}
 								strokeLinecap="round"
 								className={`fill-transparent stroke-blue-800 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
@@ -580,16 +597,22 @@ export default function Component() {
 					</h1>
 					<p>Drag the dots around to create a bézier curve, and test your easing by hovering over the boxes below.</p>
 				</div>
-				<div className="flex items-center gap-6">
-					<Switch.Root
-						className="group relative w-14 h-8 rounded-full data-[state='unchecked']:bg-neutral-900 data-[state='unchecked']:hover:bg-neutral-800 data-[state='unchecked']:active:bg-neutral-900 data-[state='checked']:bg-blue data-[state='checked']:hover:bg-blue-400 data-[state='checked']:active:bg-blue-600 duration-300 active:duration-100 ease-out"
-						id="toggle-size"
-						onClick={toggleOffset}
-						checked={offset === 400}
-					>
-						<Switch.Thumb className="flex items-center justify-center h-3 w-3 rounded-full group-data-[state='checked']:w-0 ring-2 group-data-[state='checked']:ring-1 ring-neutral-50 group-data-[state='checked']:ring-neutral-900 translate-x-3 data-[state='checked']:translate-x-10 duration-300 ease-out" />
-					</Switch.Root>
-					<label htmlFor="toggle-size">Increase canvas size</label>
+				<div className="flex items-center justify-between gap-6">
+					<div className="flex items-center gap-3">
+						<Switch.Root
+							className="group relative w-14 h-8 rounded-full data-[state='unchecked']:bg-neutral-900 data-[state='unchecked']:hover:bg-neutral-800 data-[state='unchecked']:active:bg-neutral-900 data-[state='checked']:bg-blue data-[state='checked']:hover:bg-blue-400 data-[state='checked']:active:bg-blue-600 duration-300 active:duration-100 ease-out"
+							id="toggle-size"
+							onClick={toggleOffset}
+							checked={offset === 400}
+						>
+							<Switch.Thumb className="flex items-center justify-center h-3 w-3 rounded-full group-data-[state='checked']:w-0 ring-2 group-data-[state='checked']:ring-1 ring-neutral-50 group-data-[state='checked']:ring-neutral-900 translate-x-3 data-[state='checked']:translate-x-10 duration-300 ease-out" />
+						</Switch.Root>
+						<label htmlFor="toggle-size">Increase canvas size</label>
+					</div>
+					<Button onClick={invertCurves}>
+						<i className="ri-arrow-left-right-line" />
+						Invert curves
+					</Button>
 				</div>
 				<div id="cubic-bezier-code" className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full">
 					<p className="flex-grow">
