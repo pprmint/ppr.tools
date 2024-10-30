@@ -9,27 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@radix-ui/react-collapsible": "^1.0.3",
-    "@radix-ui/react-slider": "^1.1.2",
-    "@radix-ui/react-switch": "^1.0.3",
-    "@radix-ui/react-toast": "^1.1.5",
-    "@react-spring/web": "^9.7.3",
+    "@radix-ui/react-collapsible": "^1.1.1",
+    "@radix-ui/react-slider": "^1.2.1",
+    "@radix-ui/react-switch": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.2",
+    "@react-spring/web": "^9.7.5",
     "bezier-easing": "^2.1.0",
-    "next": "14.2.3",
+    "next": "15.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",
-    "remixicon": "^4.2.0"
+    "remixicon": "^4.5.0"
   },
   "devDependencies": {
-    "@types/node": "^20.12.12",
-    "@types/react": "^18.3.2",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.19",
-    "eslint": "^9.3.0",
-    "eslint-config-next": "14.2.3",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5"
+    "@types/node": "^22.8.4",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.13.0",
+    "eslint-config-next": "15.0.2",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
   }
 }

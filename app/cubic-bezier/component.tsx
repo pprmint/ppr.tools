@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Draggable from "react-draggable";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import * as Slider from "@radix-ui/react-slider";
@@ -9,6 +9,9 @@ import BezierEasing from "bezier-easing";
 import "./animate.css";
 
 export default function Component() {
+	const dragAref = useRef(null);
+	const dragBref = useRef(null);
+
 	// Grid offset from the top in pixels
 	const [offset, setOffset] = useState(200);
 	function toggleOffset() {
@@ -208,9 +211,7 @@ export default function Component() {
 		<div className="flex flex-col 2xl:flex-row gap-9">
 			<div className="flex 2xl:w-max">
 				<div
-					className={`relative flex-row w-[424px] ${
-						offset === 400 ? "h-[1224px]" : "h-[824px]"
-					} mx-auto duration-300 ease-in-out-cubic`}
+					className={`relative flex-row w-[424px] ${offset === 400 ? "h-[1224px]" : "h-[824px]"} mx-auto duration-300 ease-in-out-cubic`}
 				>
 					<svg
 						width={400}
@@ -516,29 +517,24 @@ export default function Component() {
 								d={`M0,${offset + 400} C${positionA.x},${positionA.y} ${positionB.x},${positionB.y} 400,${offset}`}
 								strokeWidth={2}
 								strokeLinecap="round"
-								className={`fill-transparent stroke-neutral-50 ${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-in-out-cubic`}
+								className={`fill-transparent stroke-neutral-50 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 							<path
 								d={`M0,${offset + 400} ${positionA.x + 0.5},${positionA.y + 0.5}`}
 								strokeWidth={4}
 								strokeLinecap="round"
-								className={`fill-transparent stroke-blue-600 ${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-in-out-cubic`}
+								className={`fill-transparent stroke-blue-600 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 							<path
 								d={`M400,${offset} ${positionB.x + 0.5},${positionB.y + 0.5}`}
 								strokeWidth={4}
 								strokeLinecap="round"
-								className={`fill-transparent stroke-blue-800 ${
-									transitionDisabled ? "duration-0" : "duration-300"
-								} ease-in-out-cubic`}
+								className={`fill-transparent stroke-blue-800 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
 							/>
 						</g>
 					</svg>
 					<Draggable
+						nodeRef={dragAref}
 						bounds="parent"
 						grid={[4, 4]}
 						position={positionA}
@@ -550,12 +546,14 @@ export default function Component() {
 						positionOffset={{ x: "-11.5px", y: "-11.5px" }}
 					>
 						<div
+							ref={dragAref}
 							className={`absolute w-[24px] h-[24px] rounded-full bg-blue cursor-grab active:cursor-grabbing ${
 								transitionDisabled ? "duration-0" : "duration-300"
 							} ease-in-out-cubic`}
 						/>
 					</Draggable>
 					<Draggable
+						nodeRef={dragBref}
 						bounds="parent"
 						grid={[4, 4]}
 						position={positionB}
@@ -567,6 +565,7 @@ export default function Component() {
 						positionOffset={{ x: "-11.5px", y: "-11.5px" }}
 					>
 						<div
+							ref={dragBref}
 							className={`absolute w-[24px] h-[24px] rounded-full bg-blue-700 cursor-grab active:cursor-grabbing ${
 								transitionDisabled ? "duration-0" : "duration-300"
 							} ease-in-out-cubic`}
@@ -625,16 +624,10 @@ export default function Component() {
 					</Slider.Root>
 				</div>
 				<div id="previews" className="grid grid-cols-3 gap-6 z-10">
-					<div
-						className="group relative w-full h-16 col-span-3 bg-neutral-900 rounded-lg pt-5 px-8 overflow-clip"
-						onWheel={handleScroll}
-					>
+					<div className="group relative w-full h-16 col-span-3 bg-neutral-900 rounded-lg pt-5 px-8 overflow-clip" onWheel={handleScroll}>
 						<div className="relative z-10 w-full">
 							{[...Array(dotCount)].map((_, index) => {
-								const left = calculatePosition(
-									[cubicBezierA, cubicBezierB, cubicBezierC, cubicBezierD],
-									index / (dotCount - 1)
-								);
+								const left = calculatePosition([cubicBezierA, cubicBezierB, cubicBezierC, cubicBezierD], index / (dotCount - 1));
 								return (
 									<div
 										key={index}
@@ -677,9 +670,7 @@ export default function Component() {
 						<Collapsible.Trigger asChild>
 							<button onClick={() => setPresetsVisible(!presetsVisible)} className="flex gap-3">
 								<h2 className="font-display text-neutral-50">Presets</h2>
-								<i
-									className={`ri-arrow-down-s-line ${presetsVisible ? "rotate-180" : "rotate-0"} duration-200 ease-out`}
-								/>
+								<i className={`ri-arrow-down-s-line ${presetsVisible ? "rotate-180" : "rotate-0"} duration-200 ease-out`} />
 							</button>
 						</Collapsible.Trigger>
 						<hr className="border-neutral-50 flex-grow" />
@@ -701,9 +692,9 @@ export default function Component() {
 									style={{
 										animationDuration: `${duration}s`,
 										// jesus christ
-										animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${
-											1 - (easing.positionA.y - offset) / 400
-										}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - offset) / 400})`,
+										animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${1 - (easing.positionA.y - offset) / 400}, ${
+											easing.positionB.x / 400
+										}, ${1 - (easing.positionB.y - offset) / 400})`,
 									}}
 								>
 									<circle cx="50" cy="5" r="5" fill="#49e" />
@@ -712,9 +703,9 @@ export default function Component() {
 									<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
 										<path d="M4,200 V600 H400" fill="transparent" stroke="#555" strokeWidth={8} strokeDasharray={17} />
 										<path
-											d={`M4,600 C${easing.positionA.x},${easing.positionA.y - (offset === 400 ? 200 : 0)} ${
-												easing.positionB.x
-											},${easing.positionB.y - (offset === 400 ? 200 : 0)} 394,196`}
+											d={`M4,600 C${easing.positionA.x},${easing.positionA.y - (offset === 400 ? 200 : 0)} ${easing.positionB.x},${
+												easing.positionB.y - (offset === 400 ? 200 : 0)
+											} 394,196`}
 											stroke={`url(#${easing.type})`}
 											strokeWidth={8}
 											strokeLinecap="round"
