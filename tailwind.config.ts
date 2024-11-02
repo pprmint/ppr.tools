@@ -8,7 +8,7 @@ const config: Config = {
 	],
 	theme: {
 		extend: {
-            colors: {
+			colors: {
 				red: {
 					DEFAULT: "#f44",
 					50: "#fce3e7",
@@ -152,12 +152,28 @@ const config: Config = {
 			},
 			fontFamily: {
 				mono: [
-					["Basier Square Mono", "SF Mono", "Iosevka", "JetBrains Mono", "Cascadia Code", "Consolas", "monospace"],
+					[
+						"Basier Square Mono",
+						"SF Mono",
+						"Iosevka",
+						"JetBrains Mono",
+						"Cascadia Code",
+						"Consolas",
+						"monospace",
+					],
 					{
 						fontFeatureSettings: '"ss01"',
 					},
 				],
-				display: ["Silka Mono", "Red Hat Mono", "SF Mono", "Iosevka", "JetBrains Mono", "Cascadia Code", "Consolas"],
+				display: [
+					"Silka Mono",
+					"Red Hat Mono",
+					"SF Mono",
+					"Iosevka",
+					"JetBrains Mono",
+					"Cascadia Code",
+					"Consolas",
+				],
 			},
 			screens: {
 				"3xl": "1800px",

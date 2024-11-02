@@ -1,4 +1,4 @@
-# ppr.tools <a href="https://ppr.tools" target="_blank"><img align="right" height="40" src="/public/images/icon.svg"></a>
+# ppr.tools <a href="https://ppr.tools" target="_blank"><img align="right" height="40" src="/app/icon.svg"></a>
 
 A small site with small tools for niche use cases.
 

@@ -31,7 +31,7 @@ export default function FilterColor() {
 			<section className="flex flex-col gap-3 mb-12">
 				<h1 className="text-neutral-50 font-display font-medium text-3xl md:text-5xl">
 					{title}
-					<span className="text-blue">.</span>
+					<span className="text-cyan">.</span>
 				</h1>
 				<p>
 					Enter color codes and convert them to different formats. Click on parts of a converted code to copy it to your

@@ -228,7 +228,9 @@ export default function Component() {
 		<div className="flex flex-col 2xl:flex-row gap-9">
 			<div className="flex 2xl:w-max">
 				<div
-					className={`relative flex-row w-[424px] ${offset === 400 ? "h-[1224px]" : "h-[824px]"} mx-auto duration-300 ease-in-out-cubic`}
+					className={`relative flex-row w-[424px] ${
+						offset === 400 ? "h-[1224px]" : "h-[824px]"
+					} mx-auto duration-300 ease-in-out-cubic`}
 				>
 					<svg
 						width={400}
@@ -531,22 +533,30 @@ export default function Component() {
 						</g>
 						<g id="draw">
 							<path
-								d={`M0,${offset + 400} C${positionA.x},${positionA.y} ${positionB.x},${positionB.y} 400,${offset}`}
+								d={`M0,${offset + 400} C${positionA.x},${positionA.y} ${positionB.x},${
+									positionB.y
+								} 400,${offset}`}
 								strokeWidth={2}
 								strokeLinecap="round"
-								className={`fill-transparent stroke-neutral-50 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
+								className={`fill-transparent stroke-neutral-50 ${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-in-out-cubic`}
 							/>
 							<path
 								d={`M0,${offset + 400} ${positionA.x},${positionA.y}`}
 								strokeWidth={4}
 								strokeLinecap="round"
-								className={`fill-transparent stroke-blue-600 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
+								className={`fill-transparent stroke-cyan-600 ${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-in-out-cubic`}
 							/>
 							<path
 								d={`M400,${offset} ${positionB.x},${positionB.y}`}
 								strokeWidth={4}
 								strokeLinecap="round"
-								className={`fill-transparent stroke-blue-800 ${transitionDisabled ? "duration-0" : "duration-300"} ease-in-out-cubic`}
+								className={`fill-transparent stroke-cyan-800 ${
+									transitionDisabled ? "duration-0" : "duration-300"
+								} ease-in-out-cubic`}
 							/>
 						</g>
 					</svg>
@@ -564,7 +574,7 @@ export default function Component() {
 					>
 						<div
 							ref={dragAref}
-							className={`absolute w-[24px] h-[24px] rounded-full bg-blue cursor-grab active:cursor-grabbing ${
+							className={`absolute w-[24px] h-[24px] rounded-full bg-cyan cursor-grab active:cursor-grabbing ${
 								transitionDisabled ? "duration-0" : "duration-300"
 							} ease-in-out-cubic`}
 						/>
@@ -583,7 +593,7 @@ export default function Component() {
 					>
 						<div
 							ref={dragBref}
-							className={`absolute w-[24px] h-[24px] rounded-full bg-blue-700 cursor-grab active:cursor-grabbing ${
+							className={`absolute w-[24px] h-[24px] rounded-full bg-cyan-700 cursor-grab active:cursor-grabbing ${
 								transitionDisabled ? "duration-0" : "duration-300"
 							} ease-in-out-cubic`}
 						/>
@@ -593,14 +603,17 @@ export default function Component() {
 			<div className="w-full flex flex-col gap-6">
 				<div className="flex flex-col gap-3">
 					<h1 className="text-neutral-50 font-display font-medium text-3xl md:text-5xl">
-						Cubic bézier<span className="text-blue">.</span>
+						Cubic bézier<span className="text-cyan">.</span>
 					</h1>
-					<p>Drag the dots around to create a bézier curve, and test your easing by hovering over the boxes below.</p>
+					<p>
+						Drag the dots around to create a bézier curve, and test your easing by hovering over the boxes
+						below.
+					</p>
 				</div>
 				<div className="flex items-center justify-between gap-6">
 					<div className="flex items-center gap-3">
 						<Switch.Root
-							className="group relative w-14 h-8 rounded-full data-[state='unchecked']:bg-neutral-900 data-[state='unchecked']:hover:bg-neutral-800 data-[state='unchecked']:active:bg-neutral-900 data-[state='checked']:bg-blue data-[state='checked']:hover:bg-blue-400 data-[state='checked']:active:bg-blue-600 duration-300 active:duration-100 ease-out"
+							className="group relative w-14 h-8 rounded-full data-[state='unchecked']:bg-neutral-900 data-[state='unchecked']:hover:bg-neutral-800 data-[state='unchecked']:active:bg-neutral-900 data-[state='checked']:bg-cyan data-[state='checked']:hover:bg-cyan-400 data-[state='checked']:active:bg-cyan-600 duration-300 active:duration-100 ease-out"
 							id="toggle-size"
 							onClick={toggleOffset}
 							checked={offset === 400}
@@ -614,14 +627,19 @@ export default function Component() {
 						Invert curves
 					</Button>
 				</div>
-				<div id="cubic-bezier-code" className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full">
+				<div
+					id="cubic-bezier-code"
+					className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3 w-full"
+				>
 					<p className="flex-grow">
 						cubic-bezier(<span className="text-neutral-50">{cubicBezierText}</span>);
 					</p>
-					<i
-						className="ri-clipboard-line cursor-pointer hover:text-neutral-50 duration-100"
+					<button
+						className="text-sm hover:text-neutral-50 duration-100"
 						onClick={() => navigator.clipboard.writeText(`cubic-bezier(${cubicBezierText})`)}
-					/>
+					>
+						COPY
+					</button>
 				</div>
 				<div id="duration-controls">
 					<div className="flex justify-between text-xs">
@@ -637,24 +655,30 @@ export default function Component() {
 						max={2}
 						step={0.01}
 					>
-						<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-							<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
+						<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+							<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
 						</Slider.Track>
 						<Slider.Thumb
-							className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+							className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 							aria-label="transition duration"
 						/>
 					</Slider.Root>
 				</div>
 				<div id="previews" className="grid grid-cols-3 gap-6 z-10">
-					<div className="group relative w-full h-16 col-span-3 bg-neutral-900 rounded-lg pt-5 px-8 overflow-clip" onWheel={handleScroll}>
+					<div
+						className="group relative w-full h-16 col-span-3 bg-neutral-900 rounded-lg pt-5 px-8 overflow-clip"
+						onWheel={handleScroll}
+					>
 						<div className="relative z-10 w-full">
 							{[...Array(dotCount)].map((_, index) => {
-								const left = calculatePosition([cubicBezierA, cubicBezierB, cubicBezierC, cubicBezierD], index / (dotCount - 1));
+								const left = calculatePosition(
+									[cubicBezierA, cubicBezierB, cubicBezierC, cubicBezierD],
+									index / (dotCount - 1)
+								);
 								return (
 									<div
 										key={index}
-										className={`absolute w-6 h-6 -translate-x-1/2 bg-blue/25 rounded-full ${
+										className={`absolute w-6 h-6 -translate-x-1/2 bg-cyan/25 rounded-full ${
 											transitionDisabled ? "duration-0" : "duration-300"
 										} ease-in-out-cubic`}
 										style={{ left: `${left}%` }}
@@ -665,25 +689,25 @@ export default function Component() {
 					</div>
 					<div className="group relative w-full h-32 col-span-3 bg-neutral-900 rounded-lg">
 						<div
-							className="absolute left-0 group-hover:left-full group-hover:-translate-x-full w-[calc(33%-14px)] h-full bg-blue rounded-lg"
+							className="absolute left-0 group-hover:left-full group-hover:-translate-x-full w-[calc(33%-14px)] h-full bg-cyan rounded-lg"
 							style={{ transition: `all ${duration}s cubic-bezier(${cubicBezierText})` }}
 						/>
 					</div>
 					<div className="group w-full h-32 bg-neutral-900 rounded-lg">
 						<div
-							className="w-full h-full opacity-0 group-hover:opacity-100 bg-blue rounded-lg"
+							className="w-full h-full opacity-0 group-hover:opacity-100 bg-cyan rounded-lg"
 							style={{ transition: `all ${duration}s cubic-bezier(${cubicBezierText})` }}
 						/>
 					</div>
 					<div className="group w-full h-32 bg-neutral-900 rounded-lg">
 						<div
-							className="w-full h-full rotate-0 group-hover:rotate-180 bg-blue rounded-lg"
+							className="w-full h-full rotate-0 group-hover:rotate-180 bg-cyan rounded-lg"
 							style={{ transition: `all ${duration}s cubic-bezier(${cubicBezierText})` }}
 						/>
 					</div>
 					<div className="group w-full h-32 bg-neutral-900 rounded-lg">
 						<div
-							className="w-full h-full scale-0 group-hover:scale-100 bg-blue rounded-lg"
+							className="w-full h-full scale-0 group-hover:scale-100 bg-cyan rounded-lg"
 							style={{ transition: `all ${duration}s cubic-bezier(${cubicBezierText})` }}
 						/>
 					</div>
@@ -693,7 +717,11 @@ export default function Component() {
 						<Collapsible.Trigger asChild>
 							<button onClick={() => setPresetsVisible(!presetsVisible)} className="flex gap-3">
 								<h2 className="font-display text-neutral-50">Presets</h2>
-								<i className={`ri-arrow-down-s-line ${presetsVisible ? "rotate-180" : "rotate-0"} duration-200 ease-out`} />
+								<i
+									className={`ri-arrow-down-s-line ${
+										presetsVisible ? "rotate-180" : "rotate-0"
+									} duration-200 ease-out`}
+								/>
 							</button>
 						</Collapsible.Trigger>
 						<hr className="border-neutral-50 flex-grow" />
@@ -715,18 +743,30 @@ export default function Component() {
 									style={{
 										animationDuration: `${duration}s`,
 										// jesus christ
-										animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${1 - (easing.positionA.y - offset) / 400}, ${
-											easing.positionB.x / 400
-										}, ${1 - (easing.positionB.y - offset) / 400})`,
+										animationTimingFunction: `cubic-bezier(${easing.positionA.x / 400}, ${
+											1 - (easing.positionA.y - offset) / 400
+										}, ${easing.positionB.x / 400}, ${1 - (easing.positionB.y - offset) / 400})`,
 									}}
 								>
-									<circle cx="50" cy="5" r="5" fill="#49e" />
+									<circle cx="50" cy="5" r="5" fill="#2cf" />
 								</svg>
 								<div className="w-full flex items-center justify-center aspect-square p-3 mb-3 rounded-full overflow-hidden bg-neutral-900 group-hover:bg-neutral-800 duration-200">
-									<svg viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg" className="w-2/3 h-auto">
-										<path d="M4,200 V600 H400" fill="transparent" stroke="#555" strokeWidth={8} strokeDasharray={17} />
+									<svg
+										viewBox="0 0 400 800"
+										xmlns="http://www.w3.org/2000/svg"
+										className="w-2/3 h-auto"
+									>
 										<path
-											d={`M4,600 C${easing.positionA.x},${easing.positionA.y - (offset === 400 ? 200 : 0)} ${easing.positionB.x},${
+											d="M4,200 V600 H400"
+											fill="transparent"
+											stroke="#555"
+											strokeWidth={8}
+											strokeDasharray={17}
+										/>
+										<path
+											d={`M4,600 C${easing.positionA.x},${
+												easing.positionA.y - (offset === 400 ? 200 : 0)
+											} ${easing.positionB.x},${
 												easing.positionB.y - (offset === 400 ? 200 : 0)
 											} 394,196`}
 											stroke={`url(#${easing.type})`}
@@ -735,21 +775,42 @@ export default function Component() {
 											fill="transparent"
 										/>
 										<defs>
-											<linearGradient id="in" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+											<linearGradient
+												id="in"
+												gradientUnits="objectBoundingBox"
+												x1="0"
+												y1="0"
+												x2="1"
+												y2="0"
+											>
 												<stop stopColor="#eee" />
 												<stop offset="75%" stopColor="#eee" />
-												<stop offset="100%" stopColor="#49e" />
+												<stop offset="100%" stopColor="#2cf" />
 											</linearGradient>
-											<linearGradient id="out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stopColor="#49e" />
+											<linearGradient
+												id="out"
+												gradientUnits="objectBoundingBox"
+												x1="0"
+												y1="0"
+												x2="1"
+												y2="0"
+											>
+												<stop stopColor="#2cf" />
 												<stop offset="25%" stopColor="#eee" />
 												<stop offset="100%" stopColor="#eee" />
 											</linearGradient>
-											<linearGradient id="in-out" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
-												<stop stopColor="#49e" />
+											<linearGradient
+												id="in-out"
+												gradientUnits="objectBoundingBox"
+												x1="0"
+												y1="0"
+												x2="1"
+												y2="0"
+											>
+												<stop stopColor="#2cf" />
 												<stop offset="33%" stopColor="#eee" />
 												<stop offset="66%" stopColor="#eee" />
-												<stop offset="100%" stopColor="#49e" />
+												<stop offset="100%" stopColor="#2cf" />
 											</linearGradient>
 										</defs>
 									</svg>

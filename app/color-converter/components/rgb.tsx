@@ -39,7 +39,7 @@ export default function RgbComponent() {
 							id="source"
 							placeholder="255"
 							size={2}
-							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-blue invalid:border-b-red"
+							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-cyan invalid:border-b-red"
 							style={{ appearance: "textfield" }}
 							onChange={(e) => {
 								const value = parseFloat(e.target.value);
@@ -61,7 +61,7 @@ export default function RgbComponent() {
 							id="source"
 							placeholder="255"
 							size={2}
-							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-blue invalid:border-b-red"
+							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-cyan invalid:border-b-red"
 							style={{ appearance: "textfield" }}
 							onChange={(e) => {
 								const value = parseFloat(e.target.value);
@@ -83,7 +83,7 @@ export default function RgbComponent() {
 							id="source"
 							placeholder="255"
 							size={2}
-							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-blue invalid:border-b-red"
+							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-cyan invalid:border-b-red"
 							style={{ appearance: "textfield" }}
 							onChange={(e) => {
 								const value = parseFloat(e.target.value);
@@ -105,7 +105,7 @@ export default function RgbComponent() {
 							id="source"
 							placeholder="0.123"
 							size={4}
-							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-blue invalid:border-b-red"
+							className="bg-transparent placeholder:text-neutral-600 focus:outline-none invalid:text-red border-b-2 border-b-neutral-900 focus:border-b-cyan invalid:border-b-red"
 							style={{ appearance: "textfield" }}
 							onChange={(e) => {
 								const value = parseFloat(e.target.value);
@@ -161,7 +161,7 @@ export default function RgbComponent() {
 						</span>
 						<span
 							onClick={() => navigator.clipboard.writeText(rgbaToHex)}
-							className="text-neutral-50 hover:text-blue hover:bg-neutral-800 rounded-md cursor-pointer active:opacity-75 duration-100 active:duration-75"
+							className="text-neutral-50 hover:text-cyan hover:bg-neutral-800 rounded-md cursor-pointer active:opacity-75 duration-100 active:duration-75"
 						>
 							{rgbaToHex}
 						</span>

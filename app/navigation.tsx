@@ -97,7 +97,7 @@ function DesktopNavigation() {
 									href={link.path}
 									className={`group flex gap-3 rounded-[20px] ${
 										path === link.path
-											? "mx-0 my-0 px-4 py-2 text-neutral-950 bg-blue"
+											? "mx-0 my-0 px-4 py-2 text-neutral-950 bg-cyan"
 											: "mx-2 hover:mx-0 my-1 hover:my-0 px-2 hover:px-4 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
 									} active:scale-[97%] duration-200 ease-out`}
 								>
@@ -155,7 +155,7 @@ function MobileNavigation() {
 						href={link.path}
 						className={`group flex gap-3 rounded-[20px] ${
 							path === link.path
-								? "mx-0 my-0 px-3 py-2 text-neutral-950 bg-blue"
+								? "mx-0 my-0 px-3 py-2 text-neutral-950 bg-cyan"
 								: "mx-1 hover:mx-0 my-1 hover:my-0 px-2 hover:px-3 py-1 hover:py-2 hover:text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800"
 						} active:scale-[97%] duration-200 ease-out`}
 					>
