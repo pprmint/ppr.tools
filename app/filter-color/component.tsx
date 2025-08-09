@@ -78,7 +78,7 @@ export default function Component() {
 				<div style={{ backgroundColor: `#${targetColor}` }} className="w-full h-12 lg:h-24 rounded-r-lg" />
 			</div>
 			<div className="flex gap-3 col-span-2 bg-neutral-900 rounded-lg px-4 py-3">
-				<p className="flex-grow">
+				<p className="grow">
 					filter: <span className="text-neutral-50">{filters}</span>;
 				</p>
 				<button
@@ -105,11 +105,11 @@ export default function Component() {
 					max={500}
 					step={1}
 				>
-					<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-						<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
+					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Brightness"
 					/>
 				</Slider.Root>
@@ -133,11 +133,11 @@ export default function Component() {
 					max={500}
 					step={1}
 				>
-					<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-						<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
+					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Contrast"
 					/>
 				</Slider.Root>
@@ -162,11 +162,11 @@ export default function Component() {
 					max={180}
 					step={1}
 				>
-					<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-						<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
+					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Hue rotate"
 					/>
 				</Slider.Root>
@@ -190,11 +190,11 @@ export default function Component() {
 					max={100}
 					step={1}
 				>
-					<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-						<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
+					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Invert"
 					/>
 				</Slider.Root>
@@ -218,11 +218,11 @@ export default function Component() {
 					max={500}
 					step={1}
 				>
-					<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-						<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
+					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Saturate"
 					/>
 				</Slider.Root>
@@ -246,11 +246,11 @@ export default function Component() {
 					max={100}
 					step={1}
 				>
-					<Slider.Track className="bg-cyan-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
-						<Slider.Range className="absolute bg-cyan-600 rounded-full h-full" />
+					<Slider.Track className="bg-blue-900 relative grow rounded-full h-1 group-hover:h-2 duration-100">
+						<Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
 					</Slider.Track>
 					<Slider.Thumb
-						className="block bg-cyan w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
+						className="block bg-blue w-3 h-3 focus-visible:scale-150 group-hover:scale-150 origin-center rounded-full focus:outline-none duration-100"
 						aria-label="Sepia"
 					/>
 				</Slider.Root>

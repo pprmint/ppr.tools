@@ -3,7 +3,7 @@ export default function Home() {
 		<main className="animate-page-in">
 			<section className="flex flex-col gap-3">
 				<h1 className="text-neutral-50 font-display font-medium text-3xl md:text-5xl">
-					Hello world<span className="text-cyan">.</span>
+					Hello world<span className="text-blue">.</span>
 				</h1>
 				<p>
 					This site is a collection of various tools that help me (and maybe you) with web development and

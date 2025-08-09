@@ -59,7 +59,7 @@ export default function HexComponent() {
 							placeholder="123456ff"
 							maxLength={8}
               size={7}
-							className="bg-transparent placeholder:text-neutral-600 focus:outline-none border-0 border-b-2 border-neutral-900 focus:border-cyan"
+							className="bg-transparent placeholder:text-neutral-600 focus:outline-none border-0 border-b-2 border-neutral-900 focus:border-blue"
 							onChange={(e) => {
 								const value = e.target.value;
 								const hexRegex = /^[0-9A-Fa-f]*$/;
@@ -137,7 +137,7 @@ export default function HexComponent() {
 						,
 						<span
 							onClick={() => navigator.clipboard.writeText(String(colorChannels.b))}
-							className="text-neutral-50 hover:text-cyan hover:bg-neutral-800 rounded-md cursor-pointer active:opacity-75 duration-100 active:duration-75"
+							className="text-neutral-50 hover:text-blue hover:bg-neutral-800 rounded-md cursor-pointer active:opacity-75 duration-100 active:duration-75"
 						>
 							{colorChannels.b}
 						</span>
