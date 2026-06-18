@@ -123,8 +123,8 @@ function DesktopNavigation() {
 									<Link
 										href={
 											Links.some((link) => path === link.path) && path != "/"
-												? `https://github.com/pprmint/ppr.tools/tree/main/app${path}`
-												: "https://github.com/pprmint/ppr.tools"
+												? `https://github.com/pprmint/tools.ppr.one/tree/main/app${path}`
+												: "https://github.com/pprmint/tools.ppr.one"
 										}
 										target="_blank"
 										rel="noopener noreferrer"

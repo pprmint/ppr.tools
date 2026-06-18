@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 		siteName: "tools.ppr.one",
 	},
 	twitter: {
-		site: "ppr.tools",
+		site: "tools.ppr.one",
 		creator: "@npprmint",
 		card: "summary_large_image",
 	},

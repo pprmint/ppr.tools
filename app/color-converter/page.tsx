@@ -6,20 +6,20 @@ const title = "Color converter";
 const description = "Convert colors to and from HEX, RGB and HSL formats.";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://ppr.tools"),
+	metadataBase: new URL("https://tools.ppr.one"),
 	title: `${title}.`,
 	description: description,
 	openGraph: {
 		images: [
 			{
-				url: `https://ppr.tools/api/og?title=${title}`,
+				url: `https://tools.ppr.one/api/og?title=${title}`,
 			},
 		],
 	},
 	twitter: {
 		images: [
 			{
-				url: `https://ppr.tools/api/og?title=${title}`,
+				url: `https://tools.ppr.one/api/og?title=${title}`,
 			},
 		],
 	},
